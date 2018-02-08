@@ -35,19 +35,22 @@ public class Triangle
 	public void calcPerimeter( )
 	{
 		perimeter = sideA + sideB + sideC; 
+		System.out.println(sideA);
+		System.out.println(sideB);
+		System.out.println(sideC);
 
 	}
 
 	public void calcArea( )
 	{
-		double s;
-
-
+		double s = perimeter/2.0;
+		theArea = Math.sqrt(s * (s-sideA) * (s-sideB) * (s-sideC)); 
+		System.out.println("Area == " + theArea);
+		
 	}
 
 	public void print( )
 	{
-
 
 		System.out.println("\n\n");
 	}

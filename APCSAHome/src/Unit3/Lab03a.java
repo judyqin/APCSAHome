@@ -35,7 +35,7 @@ public class Lab03a  //this class is used to test Triangle
 
 		System.out.print("Enter side C ::  ");
 		c = keyboard.nextInt();
-
+		
 
 		test.setSides(a,b,c);
 		test.calcPerimeter();
