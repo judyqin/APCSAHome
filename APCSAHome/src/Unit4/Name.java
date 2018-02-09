@@ -10,7 +10,9 @@ public class Name
 
 	public Name()
 	{
-		name = ""; 
+		name = "";
+		firstName = "";
+		lastName = "";
 		
 	}
 
@@ -25,20 +27,24 @@ public class Name
 	   name = s; 
 
    }
+   
 
 	public String getFirst()
 	{
-
-		return "";
+		
+		firstName = name.substring(0 , name.indexOf(" "));
+		return firstName; 
+	
 	}
 
 	public String getLast()
 	{
-		return "";
+		lastName = name.substring(name.indexOf(" ")+1);
+		return lastName;
 	}
 
  	public String toString()
  	{
- 		return "";
+ 		return firstName + lastName + "\n";
 	}
 }
