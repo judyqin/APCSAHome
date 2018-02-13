@@ -10,7 +10,9 @@ public class Quadratic
 	private int a, b, c;
 	private double rootOne;
 	private double rootTwo;
-
+	private String rounded; 
+	private String rounded1; 
+	
 	public Quadratic()
 	{
 	
@@ -40,9 +42,12 @@ public class Quadratic
 	{
 		System.out.println("\n\n");
 		rootOne = (-(b)+Math.sqrt(Math.pow(b,2)-4*a*c))/(2*a); 
-		System.out.println("rootone :: " + rootOne);
+		rounded = String.format("%.2f", rootOne);
+		System.out.println("rootone :: " + rounded);
 		rootTwo = (-(b)-Math.sqrt(Math.pow(b,2)-4*a*c))/(2*a); 
-		System.out.println("roottwo :: " + rootTwo );
+		rounded1 = String.format("%.2f", rootTwo);
+		System.out.println("roottwo :: " + rounded1 );
+		
 		
 	}
 

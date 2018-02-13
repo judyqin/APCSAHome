@@ -13,8 +13,8 @@ public class FirstAndLast
 
 	public FirstAndLast()
 	{
-		word = "Ravens";
-		setString("Ravens");
+		word = "";
+		setString(" ");
 
 	}
 
