@@ -27,14 +27,14 @@ public class TriangleThree
 
 	public String getLetter()
 	{
-		String output = " ";
+		String output = "";
 		int stop = size; 
 		
 		for(int r = 1; r <= stop; r++) 
 		{
-			for(int c = r; c <= stop; c++)
+			for(int c = stop; c>r; c--)
 			{
-				output = output + " ";
+				output += " ";
 			}
 			for (int k = 1; k <= r; k++)
 			{

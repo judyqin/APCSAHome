@@ -16,6 +16,7 @@ public class Lab10e
 		do {
 		System.out.println("Guessing Game - how many numbers?" );
 		response = keyboard.nextInt();
+		keyboard.nextLine();
 		
 		GuessingGame test = new GuessingGame(response); 
 		test.playGame();
