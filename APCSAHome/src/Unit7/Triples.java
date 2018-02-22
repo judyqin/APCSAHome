@@ -27,11 +27,12 @@ public class Triples
 	{
 		int max = 0;
 			
-		for (int i = a; i > 0; i--)
+		for (int i = a; i >= 2; i--)
 		{
 			if (a%i == 0 && b%i == 0 && c%i ==0)
 			{
-				i = max; 
+				max = i;
+				return max; 
 			}
 		}
 
@@ -46,16 +47,19 @@ public class Triples
 			{
 				for (int c = 1; c < num; c++)
 				{
-					if (Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2))
+					if (a < b && b < c)
 					{
 						if ( (a % 2 == 1 && b % 2 == 0)||(a % 2 == 0 && b % 2 == 1) && c % 2 == 1)
 						{
-							if (greatestCommonFactor(a,b,c) == 1)
+							if (Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2))
 							{
-								System.out.println(a + " " + b + " " + c + "\n");
+								if (greatestCommonFactor(a,b,c) == 1)
+								{
+									System.out.println(a + " " + b + " " + c + "\n");
+								}
 							}
-						}
-					}
+						}	
+					}	
 				}
 			}
 		}
