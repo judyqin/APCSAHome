@@ -37,67 +37,42 @@ public class RomanNumeral
 
 	public Integer getNumber()
 	{
-		number = 0; 
-		
 
+		roman = roman.replaceAll("CM", "DCCCC");
+		roman = roman.replaceAll("CD", "CCCC");
+		roman = roman.replaceAll("XC", "LXXXX");
+		roman = roman.replaceAll("XL", "XXXX");
+		roman = roman.replaceAll("IX", "VIIII");
+		roman = roman.replaceAll("IV", "IIII");
 		
-		/*if (roman == "M")
+		int count = 0;
+		for (int i = 0; i < LETTERS.length; i++)
 		{
-			number = 1000;
+			for (int c = 0; c < roman.length(); c++)
+			{
+				if (roman.substring(c, c+1).equals(LETTERS[i]))
+				{
+					count += NUMBERS[i];
+				}
+			}
 		}
-		if (roman == "CM")
-		{
-			number = 900;
-		}
-		if (roman == "D")
-		{
-			number = 500;
-		}
-		if (roman == "CD")
-		{
-			number = 400;
-		}
-		if (roman == "C")
-		{
-			number = 100;
-		}
-		if (roman == "XC")
-		{
-			number = 90;
-		}
-		if (roman == "L")
-		{
-			number = 50;
-		}
-		if (roman == "XL")
-		{
-			number = 40;
-		}
-		if (roman == "X")
-		{
-			number = 10;
-		}
-		if (roman == "IX")
-		{
-			number = 9;
-		}
-		if (roman == "V")
-		{
-			number = 5;
-		}
-		if (roman == "IV")
-		{
-			number = 4;
-		}
-		if (roman == "I")
-		{
-			number = 1;
-		}*/
-		return number;
+		
+		return count;
 	}
 
 	public String toString()
 	{
-		return roman + "\n";
+		String r = "";
+		
+		for (int i = 0; i < NUMBERS.length; i++)
+		{
+			while (number >= NUMBERS[i])
+			{
+				number = number - NUMBERS[i];
+				r += LETTERS[i];
+			}
+		}
+		
+		return r + "\n";
 	}
 }

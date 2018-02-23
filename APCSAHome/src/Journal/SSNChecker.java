@@ -1,4 +1,4 @@
-package Journals;
+package Journal;
 
 public class SSNChecker {
 

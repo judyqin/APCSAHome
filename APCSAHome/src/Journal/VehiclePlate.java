@@ -1,4 +1,4 @@
-package Journals;
+package Journal;
 
 import java.util.Random; 
 
