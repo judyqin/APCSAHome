@@ -13,15 +13,13 @@ public class Deck {
 	/**
 	 * cards contains all the cards in the deck.
 	 */
-	
-	String ranks[] = {"ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"};
-	String suits[] = {"hearts", "diamonds", "clubs", "spades"};
-	int values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}; 
-	
 	//private List<Card> cards;
 	
 	//Unit 9 - Array version of the Deck
-	private Card[] cards;
+	private String ranks[] = {"ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"};
+	private String suits[] = {"hearts", "diamonds", "clubs", "spades"};
+	private int values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}; 
+	private Card[] cards = new Card[52];
 
 	/**
 	 * size is the number of not-yet-dealt cards.
@@ -29,7 +27,6 @@ public class Deck {
 	 * The next card to be dealt is at size - 1.
 	 */
 	private int size;
-
 
 	/**
 	 * Creates a new <code>Deck</code> instance.<BR>
@@ -41,13 +38,16 @@ public class Deck {
 	 */
 	public Deck(String[] ranks, String[] suits, int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		this.ranks = ranks; 
+		this.suits = suits; 
+		this.values = values;
 		
-		int[] deck = new int[52];
-	
-		for (int i = deck.length - 1; i < 0; i--)
+		for (int i = 0; i < cards.length; i++)
 		{
-			
+			cards[i] = new Card(ranks[i%13], suits[i/13], values[i%13]); 
 		}
+		size = 52; 
+		
 	}
 
 
@@ -57,6 +57,14 @@ public class Deck {
 	 */
 	public boolean isEmpty() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		if (size == 0)
+		{
+			return true; 
+		}
+		else 
+		{
+			return false; 
+		}
 	}
 
 	/**
@@ -65,6 +73,7 @@ public class Deck {
 	 */
 	public int size() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		return size; 
 	}
 
 	/**
@@ -73,6 +82,14 @@ public class Deck {
 	 */
 	public void shuffle() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+		for(int i = cards.length-1; i >= 0 ; i--){
+			int r = (int) Math.round((Math.random()  * i));			
+			Card shuffled = cards[i];
+			cards[i] = cards[r];
+			cards[r] = shuffled;
+		}
+		
+		size = ranks.length * suits.length;
 	}
 
 	/**
@@ -81,6 +98,16 @@ public class Deck {
 	 *         previously dealt.
 	 */
 	public Card deal() {
+		if (isEmpty())
+		{
+			return null;
+		}
+		else 
+		{
+			size -= 1; 
+			return cards[size];
+		}
+		
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
 	}
 
@@ -94,9 +121,9 @@ public class Deck {
 
 
 		//Unit 9 - modify to work with Arrays
-		/*
+		
 		for (int k = size - 1; k >= 0; k--) {
-			rtn = rtn + cards.get(k);
+			rtn = rtn + cards[k];
 			if (k != 0) {
 				rtn = rtn + ", ";
 			}
@@ -106,17 +133,17 @@ public class Deck {
 			}
 		}
 		rtn = rtn + "\nDealt cards: \n";
-		for (int k = cards.size() - 1; k >= size; k--) {
-			rtn = rtn + cards.get(k);
+		for (int k = cards.length - 1; k >= size; k--) {
+			rtn = rtn + cards[k];
 			if (k != size) {
 				rtn = rtn + ", ";
 			}
-			if ((k - cards.size()) % 2 == 0) {
+			if ((k - cards.length) % 2 == 0) {
 				// Insert carriage returns so entire deck is visible on console.
 				rtn = rtn + "\n";
 			}
 		}
-		*/
+		
 
 		rtn = rtn + "\n";
 		return rtn;

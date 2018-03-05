@@ -44,40 +44,40 @@ public class MyString1 {
 		return test; 
 	}
 	
-	/*public MyString1 toLowerCase()
-	{
-		char[] temp = new char[chars.length];
-		
-		for(int i = 0; i< temp.length; i++)
-		{
-			if(chars[i] >= 65)
-		}
-	}
-	
-	public boolean equals(MyString s){
-
-	    int test = 0;
-	    for(int i =0; i<s.length();i++){
-	      if (chars[i] == s.getChars()[i])
-	      {
-	        return true;
-	      }
-	      else
-	      {
-	        return false;
-	      }
-	    }
-	    return false;
-	  }
-	  public char[] getChars()
-	  {
-	    return chars;
-	  }
-	
-	/*public static MyString1 valueOf(int i)
-	{
-		
-	}*/
+//	public MyString1 toLowerCase()
+//	{
+//		char[] temp = new char[chars.length];
+//		
+//		for(int i = 0; i< temp.length; i++)
+//		{
+//			if(chars[i] >= 65)
+//		}
+//	}
+//	
+//	public boolean equals(MyString s){
+//
+//	    int test = 0;
+//	    for(int i =0; i<s.length();i++){
+//	      if (chars[i] == s.getChars()[i])
+//	      {
+//	        return true;
+//	      }
+//	      else
+//	      {
+//	        return false;
+//	      }
+//	    }
+//	    return false;
+//	  }
+//	  public char[] getChars()
+//	  {
+//	    return chars;
+//	  }
+//	
+//	/*public static MyString1 valueOf(int i)
+//	{
+//		
+//	}
 	
 	
 	public static void main (String[] args)
