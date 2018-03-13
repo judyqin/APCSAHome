@@ -1,4 +1,4 @@
-package Unit9;
+package FixedElevens;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -13,13 +13,14 @@ public class Deck {
 	/**
 	 * cards contains all the cards in the deck.
 	 */
-	//private List<Card> cards;
+	private List<Card> cards;
+
 	
-	//Unit 9 - Array version of the Deck
+//	//Unit 9 - Array version of the Deck
 	private String ranks[] = {"ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"};
 	private String suits[] = {"hearts", "diamonds", "clubs", "spades"};
 	private int values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}; 
-	private Card[] cards = new Card[52];
+//	private Card[] cards = new Card[52];
 
 	/**
 	 * size is the number of not-yet-dealt cards.
@@ -40,14 +41,24 @@ public class Deck {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
 		this.ranks = ranks; 
 		this.suits = suits; 
-		this.values = values;
+		this.values = values; 
+		cards = new ArrayList<Card>(); 
 		
-		for (int i = 0; i < cards.length; i++)
+//		for (int i = 0; i < cards.length; i++)
+//		{
+//			cards[i] = new Card(ranks[i%13], suits[i/13], values[i%13]); 
+//		}
+		
+		for (String s : suits)
 		{
-			cards[i] = new Card(ranks[i%13], suits[i/13], values[i%13]); 
+			for (int i = 0; i<ranks.length; i++)
+			{
+				Card c = new Card (ranks[i], s, values[i]);
+				cards.add(c);
+			}
 		}
 		size = 52; 
-		shuffle(); 
+		shuffle();
 	}
 
 
@@ -82,11 +93,13 @@ public class Deck {
 	 */
 	public void shuffle() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
-		for(int i = cards.length-1; i >= 0 ; i--){
-			int r = (int) Math.round((Math.random()  * i));			
-			Card shuffled = cards[i];
-			cards[i] = cards[r];
-			cards[r] = shuffled;
+		for(int i = cards.size()-1; i >= 0 ; i--){
+			int r = (int) Math.round((Math.random()  * i));	
+			Card c = cards.remove(r);
+			cards.add(i,c);
+//			Card shuffled = cards[i];
+//			cards[i] = cards[r];
+//			cards[r] = shuffled;
 		}
 		
 		size = ranks.length * suits.length;
@@ -105,7 +118,7 @@ public class Deck {
 		else 
 		{
 			size -= 1; 
-			return cards[size];
+			return cards.get(size);
 		}
 		
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
@@ -123,7 +136,7 @@ public class Deck {
 		//Unit 9 - modify to work with Arrays
 		
 		for (int k = size - 1; k >= 0; k--) {
-			rtn = rtn + cards[k];
+			rtn = rtn + cards.get(k);
 			if (k != 0) {
 				rtn = rtn + ", ";
 			}
@@ -133,12 +146,12 @@ public class Deck {
 			}
 		}
 		rtn = rtn + "\nDealt cards: \n";
-		for (int k = cards.length - 1; k >= size; k--) {
-			rtn = rtn + cards[k];
+		for (int k = cards.size() - 1; k >= size; k--) {
+			rtn = rtn + cards.get(k);
 			if (k != size) {
 				rtn = rtn + ", ";
 			}
-			if ((k - cards.length) % 2 == 0) {
+			if ((k - cards.size()) % 2 == 0) {
 				// Insert carriage returns so entire deck is visible on console.
 				rtn = rtn + "\n";
 			}

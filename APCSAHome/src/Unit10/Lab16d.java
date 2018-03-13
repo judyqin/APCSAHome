@@ -6,7 +6,11 @@ public class Lab16d
 {
 	public static void main( String args[] )
 	{
-		Madlib test = new Madlib("story.dat");
-		out.println("\n");
+		//System.out.println(System.getProperty("user.dir"));
+		//make a new MadLib
+		String madLibFile = "story.txt";
+		MadLib mad = new MadLib(madLibFile);
+		out.println(mad); 
+		
 	}
 }

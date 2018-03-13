@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 import static java.lang.System.*;
+import java.util.Random; 
 
 public class MadLib
 {
@@ -13,25 +14,59 @@ public class MadLib
 	private ArrayList<String> nouns;
 	private ArrayList<String> adjectives;
 	
+	private String madlib; 
+	private Random rand; 
+	
 	public MadLib()
 	{
 		verbs = new ArrayList<String>(); 
 		nouns = new ArrayList<String>(); 
 		adjectives = new ArrayList<String>(); 
+		
+		loadNouns();
+		loadVerbs(); 
+		loadAdjectives(); 
+		rand = new Random(); 
 	}
 
 	public MadLib(String fileName)
 	{
-		//load stuff
+		verbs = new ArrayList<String>(); 
+		nouns = new ArrayList<String>(); 
+		adjectives = new ArrayList<String>(); 
+		
 		loadNouns();
 		loadVerbs(); 
 		loadAdjectives(); 
-		
+		rand = new Random(); 
 		
 		try{
 			Scanner file = new Scanner(new File(fileName));
-		
-	
+			madlib = "";
+			
+			while (file.hasNext())
+			{
+				String next = file.next(); 
+				
+				if (next.equals("#"))
+				{
+					madlib += getRandomNoun(); 
+				}
+				else if (next.equals("@"))
+				{
+					madlib += getRandomVerb(); 
+				}
+				else if (next.equals("&"))
+				{
+					madlib += getRandomAdjective(); 
+				}
+				else 
+				{
+					madlib += next; 
+				}
+				madlib += " ";
+			}
+
 		
 		}
 		catch(Exception e)
@@ -45,20 +80,17 @@ public class MadLib
 	{
 		try{
 		
-		Scanner file1 = new Scanner(new File(nouns.dat));
-		int i = 0; 
-		while (file1.hasNext())
+		Scanner n = new Scanner(new File("nouns.txt"));
+		
+		while (n.hasNext())
 			{
-				nouns.add(i, file1.next());
-				i++;
+				nouns.add(n.next()); 
 			}
 		
 		
 		}
-		catch(Exception e)
-		{
-			out.println("Houston we have a problem!");
-		}	
+		catch(Exception e) {}	
+		
 		
 	}
 	
@@ -66,68 +98,50 @@ public class MadLib
 	{
 		try{
 		
-		Scanner file2 = new Scanner(new File(verbs.dat));
-		int i = 0; 
-		while (file2.hasNext())
+		Scanner v = new Scanner(new File("verbs.txt"));
+		
+		while (v.hasNext())
 			{
-				verbs.add(i, file2.next());
-				i++;
+				verbs.add(v.next()); 
 			}
 	
 		}
-		catch(Exception e)
-		{
-			out.println("Houston we have a problem!");
-		}
+		catch(Exception e){}
 	}
 
 	public void loadAdjectives()
 	{
 		try{
 		
-		Scanner file3 = new Scanner(new File(adjectives.dat));
-		int i = 0; 
-		while (file3.hasNext())
+		Scanner a = new Scanner(new File("adjectives.txt"));
+		
+		while (a.hasNext())
 			{
-				adjectives.add(i, file3.next());
-				i++;
+				adjectives.add(a.next()); 
 			}
-			
 	
 		}
-		catch(Exception e)
-		{
-			out.println("Houston we have a problem!");
-		}
+		catch(Exception e){}
 	}
 
 	public String getRandomVerb()
 	{
-		String randomverb = "";
-		int r = (int) (Math.random() * verbs.size());
-		randomverb += verbs.get(r);
-		return randomverb;
+		return verbs.get(rand.nextInt(verbs.size()));
 
 	}
 	
 	public String getRandomNoun()
 	{
-		String randomnoun = "";
-		int r = (int) (Math.random() * nouns.size());
-		randomnoun += adjectives.get(r);
-		return randomnoun;
+		return nouns.get(rand.nextInt(nouns.size()));
 	}
 	
 	public String getRandomAdjective()
 	{
-		String randomadj = "";
-		int r = (int) (Math.random() * adjectives.size());
-		randomadj += adjectives.get(r);
-		return randomadj;
+		return adjectives.get(rand.nextInt(adjectives.size()));
 	}		
 
 	public String toString()
 	{
-	   return "\n\n\n";
+	   return madlib;
 	}
 }
