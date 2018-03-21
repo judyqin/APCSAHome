@@ -19,7 +19,7 @@ public class Seeds {
 		public String toString() {
 			String output = "";
 			output += seeds; 
-			return output; 
+			return output + " seeds"; 
 		}
 		
 	}
