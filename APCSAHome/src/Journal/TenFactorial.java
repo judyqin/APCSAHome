@@ -2,6 +2,8 @@ package Journal;
 
 public class TenFactorial {
 	
+	int fact = 1; 
+	
 	public int run() { 
 
 	int output = 1; 
@@ -11,12 +13,15 @@ public class TenFactorial {
 	return output; 
 	}
 	
-	public void factorial(int x) {
-		
-		if (x<10) { 
-			factorial(x+1);
-			System.out.println(x); 
-		}
+	public int factorial(int x) { 
+	
+	if (x == 1) {
+		return fact; 
+	}
+	else {
+		fact = factorial(x-1) * x;
+		return fact; 
+	}
 		
 	}
 	public static void main(String args[]) {
@@ -27,6 +32,6 @@ public class TenFactorial {
 		System.out.println(t.run());
 		
 		TenFactorial x = new TenFactorial(); 
-		x.factorial(10);
+		System.out.println(x.factorial(10));
 	}
 }

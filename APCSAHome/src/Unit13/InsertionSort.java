@@ -17,24 +17,31 @@ class InsertionSort
 	public void add( String  word)
 	{
 
-		int loc = 0;
-		if (list.size() == 0) {
-			list.add(word);
-		}
-		else if (list.get(loc).compareTo(word) < 0){
-			if (list.size() >= 2 && word.compareTo(list.get(loc+1))>0) {
-				list.add(loc+2, word);
-			}
-			else {
-			list.add(loc+1, word);
-			}
-			loc++;
-		}
-		else if (list.get(loc).compareTo(word) > 0) {
-			list.add(loc,word);
-			loc++;
-		}
+		int loc = 0; //OLD CODE 
+//		if (list.size() == 0) {
+//			list.add(word);
+//		}
+//		else if (list.get(loc).compareTo(word) < 0){
+//			if (list.size() >= 2 && word.compareTo(list.get(loc+1))>0) {
+//				list.add(loc+2, word);
+//			}
+//			else {
+//			list.add(loc+1, word);
+//			}
+//			loc++;
+//		}
+//		else if (list.get(loc).compareTo(word) > 0) {
+//			list.add(loc,word);
+//			loc++;
+//		}
 		//System.out.println(list);
+		
+		if(Collections.binarySearch(list,word) < 0) {
+			loc = Collections.binarySearch(list, word);
+			loc = Math.abs(loc)-1;
+			list.add(loc,word);
+		}
+		
 		
 	}
 

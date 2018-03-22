@@ -22,10 +22,10 @@ public class QuickSort
 		
 		if (low < high) { 
 			int spot = partition(list, low, high); 
-			quickSort(list, low, spot); 
-			quickSort(list, spot+1, high);
 			System.out.println("pass " + passCount + " " + Arrays.toString(list) + "\n");
 			passCount++;
+			quickSort(list, low, spot); 
+			quickSort(list, spot+1, high);
 		}
 		
 	}
