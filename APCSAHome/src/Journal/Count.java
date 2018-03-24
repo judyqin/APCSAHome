@@ -44,11 +44,11 @@ public class Count {
 	    	long start = System.nanoTime();
 	    	System.out.println(linearSearch(n, 2));
 	    	long end = System.nanoTime();
-	    	System.out.println("Took: " + ((end - start) / 1000) + " ms");
+	    	System.out.println("Took: " + ((end - start) / 1000) + " milliseconds");
 	    	start = System.nanoTime();
 	    	System.out.println(Arrays.binarySearch(n, 2));
 	    	end = System.nanoTime();
-	    	System.out.println("Took: " + ((end - start) / 1000000) + " ms");
+	    	System.out.println("Took: " + ((end - start) / 1000) + " milliseconds");
 	    	System.out.println("");
 	    	count++;
 		} while(count <= 10);
