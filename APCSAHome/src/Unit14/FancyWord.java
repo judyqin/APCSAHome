@@ -6,6 +6,7 @@ import static java.lang.System.*;
 public class FancyWord
 {
 	private char[][] mat;
+	private String word; 
 
 	public FancyWord()
 	{
@@ -14,6 +15,7 @@ public class FancyWord
 
    public FancyWord(String s)
 	{
+	   word = s; 
 	   int size = s.length();
 	   mat = new char[size][size];
 	   
@@ -25,12 +27,13 @@ public class FancyWord
 	   }
 	   
 	}
+ 
 
    public String toString()
 	{
 		String output="";
-		for (int i =0; i < mat.length; i++){
-			for (int j = 0; j < mat.length; j++){
+		for (int i =0; i < word.length(); i++){
+			for (int j = 0; j < word.length(); j++){
 				output += mat[i][j];
 			}
 			output += "\n";
