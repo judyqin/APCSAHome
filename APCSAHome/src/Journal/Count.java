@@ -1,26 +1,56 @@
 package Journal;
 
-import java.util.Arrays; 
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Random;
 
 public class Count {
 	
-	public static void main(String args[]) {
-		
-		int[] digits = {1,4,5,6,87,24,70,40,69,10,52,9,5,40,10,99,0};
-		int[] temp = digits;
+	public static int[] nums; 
+	
+	 public static int[] makeArray(int[] s) {
 		 
-		System.out.println(Arrays.toString(digits));
-		Arrays.sort(digits);
-		
-		for (int i = 0; i < digits.length -1; i++) {
-			for (int j = 1;j < digits.length; j++) {
-				int count = 0; 
-				if (digits[i] == digits[j]) {
-					count ++; 
-					System.out.println(digits[i] + ": " + count); 
-				}
+		    int size = s.length;
+		    nums = new int[size];
+		    for(int i =0;i<size;i++){
+		      nums[s[i]]++;
+		    }
+		    return nums;
+		  }
+	 
+	 public static int linearSearch(int[] s, int findnum) {
+		 
+		 int i=0;
+		 while (i<s.length){
+			if (s[i] == findnum){
+				return i;
 			}
-		}
+			 i++;
+		 }
+		 return -1;
+	 }
+
+	public static void main(String[] args) {
 		
-	}
+		int count = 0; 
+		
+		do {
+			int[] n = new int[100];
+	    	for(int i =0;i<100;i++){
+	    		n[i] = (int)(Math.random()*100);
+	    	}
+	    	int[] numbers = makeArray(n);
+	    	System.out.println(Arrays.toString(numbers));
+	    	long start = System.nanoTime();
+	    	System.out.println(linearSearch(n, 2));
+	    	long end = System.nanoTime();
+	    	System.out.println("Took: " + ((end - start) / 1000) + " ms");
+	    	start = System.nanoTime();
+	    	System.out.println(Arrays.binarySearch(n, 2));
+	    	end = System.nanoTime();
+	    	System.out.println("Took: " + ((end - start) / 1000000) + " ms");
+	    	System.out.println("");
+	    	count++;
+		} while(count <= 10);
+	  }
 }
