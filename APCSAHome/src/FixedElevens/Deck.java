@@ -19,7 +19,7 @@ public class Deck {
 //	//Unit 9 - Array version of the Deck
 	private String ranks[] = {"ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"};
 	private String suits[] = {"hearts", "diamonds", "clubs", "spades"};
-	private int values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}; 
+	private int values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0}; 
 //	private Card[] cards = new Card[52];
 
 	/**
