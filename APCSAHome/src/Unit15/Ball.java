@@ -21,9 +21,33 @@ public class Ball extends Block
 		xSpeed = 3; 
 		ySpeed = 1; 
 	}
+	
+	public Ball(int x, int y, int w, int h) {
+		super(x, y, w, h); 
+		xSpeed = 3; 
+		ySpeed = 1; 
+	}
+	
+	public Ball(int x, int y, int w, int h, Color c) {
+		super(x, y, w, h, c); 
+		xSpeed = 3; 
+		ySpeed = 1; 
+	}
 
-	   
-   //add the set methods
+	public Ball(int x, int y, int w, int h, Color c, int xs, int ys) {
+		super(x, y, w, h, c); 
+		xSpeed = xs; 
+		ySpeed = ys; 
+	}
+	
+	//add the set methods
+	public void setXSpeed(int xs) {
+		xSpeed = xs; 
+	}
+	
+	public void setYSpeed(int ys) {
+		ySpeed = ys;
+	}
    
 
    public void moveAndDraw(Graphics window)
