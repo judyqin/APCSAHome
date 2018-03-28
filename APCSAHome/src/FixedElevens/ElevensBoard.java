@@ -207,7 +207,7 @@ public class ElevensBoard extends Board {
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
 		List<Integer> cards = cardIndexes();
-		if (containsPairSum11(cards) == true || containsJQK(cards) == true) {
+		if (isLegal(cards)) {
 			return true; 
 		}
 		else {
@@ -259,13 +259,13 @@ public class ElevensBoard extends Board {
 		boolean Q = false; 
 		boolean K = false; 
 		for (int i = 0; i < selectedCards.size(); i++) {
-			if (cards[selectedCards.get(i)].rank() == "jack") {
+			if (cards[selectedCards.get(i)].rank().equals("jack")) {
 				J = true; 
 			}
-			if (cards[selectedCards.get(i)].rank() == "queen") {
+			if (cards[selectedCards.get(i)].rank().equals("queen")) {
 				Q = true; 
 			}
-			if (cards[selectedCards.get(i)].rank() == "king") {
+			if (cards[selectedCards.get(i)].rank().equals("king")) {
 				K = true; 
 			}
 		}
