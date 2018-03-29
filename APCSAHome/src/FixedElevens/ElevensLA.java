@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * The ElevensBoard class represents the board in a game of Elevens.
  */
-public class ElevensBoard extends Board {
+public class ElevensLA extends Board {
 
 	/**
 	 * The size (number of cards) on the board.
@@ -41,8 +41,9 @@ public class ElevensBoard extends Board {
 	/**
 	 * Creates a new <code>ElevensBoard</code> instance.
 	 */
-	public ElevensBoard() {
+	public ElevensLA() {
 		super(BOARD_SIZE, RANKS, SUITS, POINT_VALUES);
+		System.out.println("Judy Qin, Period 4, 3/28/18, Computer # 23");
 //		cards = new Card[BOARD_SIZE];
 //		deck = new Deck(RANKS, SUITS, POINT_VALUES);
 //		if (I_AM_DEBUGGING) {
@@ -178,7 +179,7 @@ public class ElevensBoard extends Board {
 	 */
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-		if (containsPairSum11(selectedCards) == true || containsJQK(selectedCards) == true) {
+		if (containsPairSum11(selectedCards) == true || contains2Face(selectedCards) == true) {
 			return true; 
 		}
 		else {
@@ -226,9 +227,11 @@ public class ElevensBoard extends Board {
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
 		for (int i = 0; i < selectedCards.size(); i++) {
-			for (int j = 1; j < selectedCards.size(); j++) {
-				if (cards[selectedCards.get(i)].pointValue() + cards[selectedCards.get(j)].pointValue() == 11) {
-					return true; 
+			for (int j = i+1; j < selectedCards.size(); j++) {
+				for (int k = j+1; k < selectedCards.size(); k++) {
+					if (cards[selectedCards.get(i)].pointValue() + cards[selectedCards.get(j)].pointValue() + cards[selectedCards.get(k)].pointValue() == 11) {
+						return true; 
+					}
 				}
 			}
 		}
@@ -243,28 +246,31 @@ public class ElevensBoard extends Board {
 	 * @return true if the board entries in selectedCards
 	 *              include a jack, a queen, and a king; false otherwise.
 	 */
-	private boolean containsJQK(List<Integer> selectedCards) {
+	private boolean contains2Face(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
 		boolean J = false;
 		boolean Q = false; 
 		boolean K = false; 
 		for (int i = 0; i < selectedCards.size(); i++) {
-			if (cards[selectedCards.get(i)].rank().equals("jack")) {
+			for (int j = 0; j < selectedCards.size(); j++) { 
+				if (cards[selectedCards.get(i)].rank().equals("jack") || cards[selectedCards.get(j)].rank().equals("jack")) {
 				J = true; 
-			}
-			if (cards[selectedCards.get(i)].rank().equals("queen")) {
+				}
+				if (cards[selectedCards.get(i)].rank().equals("queen") || cards[selectedCards.get(j)].rank().equals("queen")) {
 				Q = true; 
-			}
-			if (cards[selectedCards.get(i)].rank().equals("king")) {
+				}
+				if (cards[selectedCards.get(i)].rank().equals("king") || cards[selectedCards.get(j)].rank().equals("king")) {
 				K = true; 
+				}
 			}
 		}
 		
-		if (J == true && Q == true && K == true) {
+		if ((J == true && J == true) ||(Q == true && Q == true) || (K == true && K == true)) {
 			return true; 
 		}
 		else {
 			return false; 
 		}
 	}
+	
 }
