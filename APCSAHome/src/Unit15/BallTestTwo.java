@@ -3,6 +3,9 @@ package Unit15;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
+import static java.lang.System.out;
+
 import java.awt.Canvas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,15 +18,8 @@ class BallTestTwo extends Canvas implements Runnable
 	{
 		setBackground(Color.WHITE);
 		setVisible(true);
-
-		//instantiate a new Ball
-
-
-		//test the Ball thoroughly
 		
-
-		//test all constructors
-
+		ball = new Ball();
 
 		new Thread(this).start();
 	}

@@ -44,13 +44,13 @@ public class ElevensLA extends Board {
 	public ElevensLA() {
 		super(BOARD_SIZE, RANKS, SUITS, POINT_VALUES);
 		System.out.println("Judy Qin, Period 4, 3/28/18, Computer # 23");
-//		cards = new Card[BOARD_SIZE];
-//		deck = new Deck(RANKS, SUITS, POINT_VALUES);
-//		if (I_AM_DEBUGGING) {
-//			System.out.println(deck);
-//			System.out.println("----------");
-//		}
-//		dealMyCards();
+		cards = new Card[BOARD_SIZE];
+		deck = new Deck(RANKS, SUITS, POINT_VALUES);
+		if (I_AM_DEBUGGING) {
+			System.out.println(deck);
+			System.out.println("----------");
+		}
+		dealMyCards();
 	}
 
 	/**
@@ -210,11 +210,11 @@ public class ElevensLA extends Board {
 	/**
 	 * Deal cards to this board to start the game.
 	 */
-//	private void dealMyCards() {
-//		for (int k = 0; k < cards.length; k++) {
-//			cards[k] = deck.deal();
-//		}
-//	}
+	private void dealMyCards() {
+		for (int k = 0; k < cards.length; k++) {
+			cards[k] = deck.deal();
+		}
+	}
 
 	/**
 	 * Check for an 11-pair in the selected cards.
@@ -231,6 +231,9 @@ public class ElevensLA extends Board {
 				for (int k = j+1; k < selectedCards.size(); k++) {
 					if (cards[selectedCards.get(i)].pointValue() + cards[selectedCards.get(j)].pointValue() + cards[selectedCards.get(k)].pointValue() == 11) {
 						return true; 
+					}
+					else {
+						return false; 
 					}
 				}
 			}
