@@ -21,13 +21,22 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	private BufferedImage back;
 	private int right; 
 	private int left; 
+	private Wall leftWall; 
+	private Wall rightWall; 
+	private Wall topWall; 
+	private Wall bottomWall; 
+	
 	Random rand = new Random(); 
 
 	public Pong()
 	{
-		ball = new Ball(600,250,10,10,Color.BLACK,4,2);
+		ball = new Ball(600,250,10,10,Color.BLACK,10,15);
 		leftPaddle = new Paddle(10,10,10,120,Color.RED,8);
 		rightPaddle = new Paddle(780,10,10,120,Color.RED,8);	
+		leftWall = new Wall(0,0,10,600,Color.WHITE);
+		rightWall = new Wall(790,0,10,600,Color.WHITE);
+		topWall = new Wall(0,0,800,10,Color.WHITE);
+		bottomWall = new Wall(0,570,800,10,Color.WHITE);
 		right = 0; 
 		left = 0; 
 		
@@ -63,6 +72,10 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		ball.moveAndDraw(graphToBack);
 		leftPaddle.draw(graphToBack);
 		rightPaddle.draw(graphToBack);
+		leftWall.draw(graphToBack);
+		rightWall.draw(graphToBack);
+		topWall.draw(graphToBack);
+		bottomWall.draw(graphToBack);
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.drawString("SCORES!", 365, 80);
 		graphToBack.setColor(Color.PINK);
@@ -70,7 +83,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		graphToBack.drawString("Right Player: " + right, 350, 125);
 
 		//see if ball hits left wall or right wall
-		if(!(ball.getX()>=10 && ball.getX()<=780))
+		if(!(ball.getX()>=leftWall.getX() && ball.getX()<=rightWall.getX()))
 		{
 			ball.setXSpeed(0);
 			ball.setYSpeed(0);
@@ -92,14 +105,14 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			}
 			
 			ball.draw(graphToBack,Color.WHITE);
-			ball = new Ball(365, 300);
+			ball = new Ball(365,300,10,10,Color.BLACK,3,2);
 			ball.moveAndDraw(graphToBack);
 			
 		}
 
 		//see if the ball hits the top or bottom wall 
 		
-		if(!(ball.getY()>=20 && ball.getY()<=530)){
+		if(!(ball.getY()>=topWall.getY() && ball.getY()<=bottomWall.getY())){
 			ball.setYSpeed(-ball.getYSpeed());
 		}
 		
@@ -129,7 +142,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 					ball.setYSpeed(-ball.getYSpeed());
 				}
 				else {
-					ball.setXSpeed(-ball.getYSpeed());
+					ball.setXSpeed(-ball.getXSpeed());
 				}
 		}
 

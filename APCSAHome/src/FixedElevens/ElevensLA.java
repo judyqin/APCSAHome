@@ -44,13 +44,13 @@ public class ElevensLA extends Board {
 	public ElevensLA() {
 		super(BOARD_SIZE, RANKS, SUITS, POINT_VALUES);
 		System.out.println("Judy Qin, Period 4, 3/28/18, Computer # 23");
-		cards = new Card[BOARD_SIZE];
-		deck = new Deck(RANKS, SUITS, POINT_VALUES);
-		if (I_AM_DEBUGGING) {
-			System.out.println(deck);
-			System.out.println("----------");
-		}
-		dealMyCards();
+//		cards = new Card[BOARD_SIZE];
+//		deck = new Deck(RANKS, SUITS, POINT_VALUES);
+//		if (I_AM_DEBUGGING) {
+//			System.out.println(deck);
+//			System.out.println("----------");
+//		}
+//		dealMyCards();
 	}
 
 	/**
@@ -210,11 +210,11 @@ public class ElevensLA extends Board {
 	/**
 	 * Deal cards to this board to start the game.
 	 */
-	private void dealMyCards() {
-		for (int k = 0; k < cards.length; k++) {
-			cards[k] = deck.deal();
-		}
-	}
+//	private void dealMyCards() {
+//		for (int k = 0; k < cards.length; k++) {
+//			cardAt(k) = deck.deal();
+//		}
+//	}
 
 	/**
 	 * Check for an 11-pair in the selected cards.
@@ -229,7 +229,7 @@ public class ElevensLA extends Board {
 		for (int i = 0; i < selectedCards.size(); i++) {
 			for (int j = i+1; j < selectedCards.size(); j++) {
 				for (int k = j+1; k < selectedCards.size(); k++) {
-					if (cards[selectedCards.get(i)].pointValue() + cards[selectedCards.get(j)].pointValue() + cards[selectedCards.get(k)].pointValue() == 11) {
+					if (cardAt(selectedCards.get(i)).pointValue() + cardAt(selectedCards.get(j)).pointValue() + cardAt(selectedCards.get(k)).pointValue() == 11) {
 						return true; 
 					}
 					else {
@@ -256,13 +256,13 @@ public class ElevensLA extends Board {
 		boolean K = false; 
 		for (int i = 0; i < selectedCards.size(); i++) {
 			for (int j = 0; j < selectedCards.size(); j++) { 
-				if (cards[selectedCards.get(i)].rank().equals("jack") || cards[selectedCards.get(j)].rank().equals("jack")) {
+				if (cardAt(selectedCards.get(i)).rank().equals("jack") || cardAt(selectedCards.get(j)).rank().equals("jack")) {
 				J = true; 
 				}
-				if (cards[selectedCards.get(i)].rank().equals("queen") || cards[selectedCards.get(j)].rank().equals("queen")) {
+				if (cardAt(selectedCards.get(i)).rank().equals("queen") || cardAt(selectedCards.get(j)).rank().equals("queen")) {
 				Q = true; 
 				}
-				if (cards[selectedCards.get(i)].rank().equals("king") || cards[selectedCards.get(j)].rank().equals("king")) {
+				if (cardAt(selectedCards.get(i)).rank().equals("king") || cardAt(selectedCards.get(j)).rank().equals("king")) {
 				K = true; 
 				}
 			}

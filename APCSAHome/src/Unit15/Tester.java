@@ -23,7 +23,11 @@ public class Tester extends JFrame
 //		getContentPane().add(padTest);
 		
 		
-		Pong game = new Pong();
+//		Pong game = new Pong();
+//		((Component)game).setFocusable(true);			
+//		getContentPane().add(game);
+		
+		BreakOut game = new BreakOut();
 		((Component)game).setFocusable(true);			
 		getContentPane().add(game);
 				
