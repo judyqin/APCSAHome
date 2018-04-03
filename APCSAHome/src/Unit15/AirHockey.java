@@ -1,4 +1,4 @@
-package Unit15; 
+package Unit15;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,33 +12,32 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.Random; 
 
-public class Pong extends Canvas implements KeyListener, Runnable
+public class AirHockey extends Canvas implements KeyListener, Runnable
 {
-//	private Ball ball;
-//	private BlinkyBall ball; 
-//	private SpeedUpBall ball; 
-	private InvisibleBall ball; 
+	private Ball ball;
 	private Paddle leftPaddle;
 	private Paddle rightPaddle;
 	private boolean[] keys;
 	private BufferedImage back;
 	private int right; 
 	private int left; 
+	private Block leftGoal; 
+	private Block rightGoal; 
 	private Wall leftWall; 
 	private Wall rightWall; 
 	private Wall topWall; 
 	private Wall bottomWall; 
 	
+	
 	Random rand = new Random(); 
 
-	public Pong()
+	public AirHockey()
 	{
-//		ball = new Ball(600,250,10,10,Color.BLACK,10,15);
-//		ball = new BlinkyBall(600,250,10,10,Color.BLACK,10,15);
-//		ball = new SpeedUpBall(600,250,10,10,Color.BLACK,10,15);
-		ball = new InvisibleBall(600,250,10,10,Color.BLACK,10,15);
-		leftPaddle = new Paddle(10,10,10,120,Color.RED,8);
-		rightPaddle = new Paddle(780,10,10,120,Color.RED,8);	
+		ball = new Ball(600,250,10,10,Color.BLACK,3,4);
+		leftPaddle = new Paddle(20,10,10,120,Color.RED,8);
+		rightPaddle = new Paddle(760,10,10,120,Color.RED,8);	
+		leftGoal = new Block(10,210,10,100,Color.BLUE);
+		rightGoal = new Block(770,210,10,100,Color.BLUE);
 		leftWall = new Wall(0,0,10,600,Color.WHITE);
 		rightWall = new Wall(790,0,10,600,Color.WHITE);
 		topWall = new Wall(0,0,800,10,Color.WHITE);
@@ -46,7 +45,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		right = 0; 
 		left = 0; 
 		
-		keys = new boolean[4];
+		keys = new boolean[8];
 
     
     	setBackground(Color.WHITE);
@@ -78,6 +77,8 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		ball.moveAndDraw(graphToBack);
 		leftPaddle.draw(graphToBack);
 		rightPaddle.draw(graphToBack);
+		leftGoal.draw(graphToBack);
+		rightGoal.draw(graphToBack);
 		leftWall.draw(graphToBack);
 		rightWall.draw(graphToBack);
 		topWall.draw(graphToBack);
@@ -88,13 +89,14 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		graphToBack.drawString("Left Player: " + left, 350, 100);
 		graphToBack.drawString("Right Player: " + right, 350, 125);
 
-		//see if ball hits left wall or right wall
-		if(!(ball.getX()>=leftWall.getX() && ball.getX()<=rightWall.getX()))
+		//see if ball hits left or right goal
+		if(ball.didCollideRight(leftGoal)||ball.didCollideTop(leftGoal)||ball.didCollideBottom(leftGoal)
+		||ball.didCollideLeft(rightGoal)||ball.didCollideTop(rightGoal)||ball.didCollideBottom(rightGoal))
 		{
 			ball.setXSpeed(0);
 			ball.setYSpeed(0);
 			
-			if (ball.getX() >= rightWall.getX()) {
+			if (ball.getX() >= rightGoal.getX()) {
 				left += 1; 
 				graphToBack.setColor(Color.WHITE);
 				graphToBack.drawString("Left Player: " + (left - 1), 350, 100);
@@ -102,7 +104,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 				graphToBack.drawString("Left Player: " + left, 350, 100);
 			}
 			
-			if (ball.getX() <= leftWall.getX()) {
+			if (ball.getX() <= leftGoal.getX()) {
 				right += 1; 
 				graphToBack.setColor(Color.WHITE);
 				graphToBack.drawString("Right Player: " + (right - 1), 350, 125);
@@ -111,12 +113,18 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			}
 			
 			ball.draw(graphToBack,Color.WHITE);
-//			ball = new Ball(365,300,10,10,Color.BLACK,3,2);
-//			ball = new BlinkyBall(365,300,10,10,Color.BLACK,3,2);
-//			ball = new SpeedUpBall(365,300,10,10,Color.BLACK,3,2);
-			ball = new InvisibleBall(365,300,10,10,Color.BLACK,3,2);
+			ball = new Ball(365,300,10,10,Color.BLACK,3,2);
 			ball.moveAndDraw(graphToBack);
 			
+		}
+		
+//		if(!((ball.getX()>=leftGoal.getX()&&ball.getY()>=leftGoal.getY())||(ball.getX()>=leftGoal.getX()&&ball.getY()<=leftGoal.getY()+leftGoal.getHeight())||
+//		(ball.getX()>=rightGoal.getX()&&ball.getY()>=rightGoal.getY())||(ball.getX()>=rightGoal.getX()&&ball.getY()<=rightGoal.getY()+rightGoal.getHeight())))
+		
+		//see if ball hits left or right wall
+		if(!(ball.getX()>=leftWall.getX() && ball.getX()<=rightWall.getX())) 
+		{
+			ball.setXSpeed(-ball.getXSpeed());
 		}
 
 		//see if the ball hits the top or bottom wall 
@@ -166,11 +174,27 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		}
 		if(keys[2] == true)
 		{
-			rightPaddle.moveUpAndDraw(graphToBack);
+			leftPaddle.moveLeftAndDraw(graphToBack);
 		}
 		if(keys[3] == true)
 		{
+			leftPaddle.moveRightAndDraw(graphToBack);
+		}
+		if(keys[4] == true)
+		{
+			rightPaddle.moveUpAndDraw(graphToBack);
+		}
+		if(keys[5] == true)
+		{
 			rightPaddle.moveDownAndDraw(graphToBack);
+		}
+		if(keys[6] == true)
+		{
+			rightPaddle.moveLeftAndDraw(graphToBack);
+		}
+		if(keys[7] == true)
+		{
+			rightPaddle.moveRightAndDraw(graphToBack);
 		}
 		
 		twoDGraph.drawImage(back, null, 0, 0);
@@ -183,9 +207,13 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		switch(toUpperCase(e.getKeyChar()))
 		{
 			case 'W' : keys[0]=true; break;
-			case 'Z' : keys[1]=true; break;
-			case 'I' : keys[2]=true; break;
-			case 'M' : keys[3]=true; break;
+			case 'X' : keys[1]=true; break;
+			case 'A' : keys[2]=true; break; 
+			case 'D' : keys[3]=true; break; 
+			case 'I' : keys[4]=true; break;
+			case 'M' : keys[5]=true; break;
+			case 'J' : keys[6]=true; break;
+			case 'L' : keys[7]=true; break;
 		}
 	}
 
@@ -193,10 +221,14 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	{
 		switch(toUpperCase(e.getKeyChar()))
 		{
-			case 'W' : keys[0]=false; break;
-			case 'Z' : keys[1]=false; break;
-			case 'I' : keys[2]=false; break;
-			case 'M' : keys[3]=false; break;
+		case 'W' : keys[0]=false; break;
+		case 'X' : keys[1]=false; break;
+		case 'A' : keys[2]=false; break; 
+		case 'D' : keys[3]=false; break; 
+		case 'I' : keys[4]=false; break;
+		case 'M' : keys[5]=false; break;
+		case 'J' : keys[6]=false; break;
+		case 'L' : keys[7]=false; break;
 		}
 	}
 

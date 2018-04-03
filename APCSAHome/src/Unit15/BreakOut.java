@@ -85,7 +85,7 @@ public class BreakOut extends Canvas implements KeyListener, Runnable
 		//see if the ball hits the top wall 
 		
 		if(!(ball.getY()>=topWall.getY())){
-			ball.setYSpeed(-ball.getXSpeed());
+			ball.setYSpeed(-ball.getYSpeed());
 		}
 		
 		if(!(ball.getY()<=bottomWall.getY())){
@@ -103,7 +103,24 @@ public class BreakOut extends Canvas implements KeyListener, Runnable
 			ball.setYSpeed(-ball.getYSpeed());
 		}
 		
+		//see if ball hits blocks 
+		if ((ball.didCollideTop(firstBlock) || ball.didCollideBottom(firstBlock) || ball.didCollideLeft(firstBlock) || ball.didCollideRight(firstBlock)) && firstBlock.getColor() == Color.BLUE)   {
+			ball.setXSpeed(-ball.getYSpeed());
+			ball.setYSpeed(-ball.getYSpeed());
+			firstBlock = new Block(130,50,80,10,Color.WHITE); 
+		}
 		
+		if ((ball.didCollideTop(secondBlock) || ball.didCollideBottom(secondBlock) || ball.didCollideLeft(secondBlock) || ball.didCollideRight(secondBlock)) && secondBlock.getColor() == Color.BLUE) {
+			ball.setXSpeed(-ball.getYSpeed());
+			ball.setYSpeed(-ball.getYSpeed());
+			secondBlock = new Block(400,300,80,10,Color.WHITE);
+		}
+		
+		if ((ball.didCollideTop(thirdBlock) || ball.didCollideBottom(thirdBlock) || ball.didCollideLeft(thirdBlock) || ball.didCollideRight(thirdBlock)) && thirdBlock.getColor() == Color.BLUE) {
+			ball.setXSpeed(-ball.getYSpeed());
+			ball.setYSpeed(-ball.getYSpeed());
+			thirdBlock = new Block(700,200,80,10,Color.WHITE);
+		}
 		
 		//see if the paddles need to be moved
 		if(keys[0] == true)
@@ -115,11 +132,9 @@ public class BreakOut extends Canvas implements KeyListener, Runnable
 			paddle.moveLeftAndDraw(graphToBack);
 		}
 
-		
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
 
-   
 
    	public void keyPressed(KeyEvent e)
 	{
