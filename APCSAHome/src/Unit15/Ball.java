@@ -80,7 +80,7 @@ public class Ball extends Block implements Collidable
 	   setY(getY()+ySpeed);
 
 		//draw the ball at its new location
-	   draw(window);
+	   draw(window, Color.BLACK);
    }
    
 	public boolean equals(Object obj)

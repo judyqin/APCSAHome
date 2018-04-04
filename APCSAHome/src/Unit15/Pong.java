@@ -14,10 +14,10 @@ import java.util.Random;
 
 public class Pong extends Canvas implements KeyListener, Runnable
 {
-//	private Ball ball;
+	private Ball ball;
 //	private BlinkyBall ball; 
 //	private SpeedUpBall ball; 
-	private InvisibleBall ball; 
+//	private InvisibleBall ball; 
 	private Paddle leftPaddle;
 	private Paddle rightPaddle;
 	private boolean[] keys;
@@ -33,10 +33,11 @@ public class Pong extends Canvas implements KeyListener, Runnable
 
 	public Pong()
 	{
-//		ball = new Ball(600,250,10,10,Color.BLACK,10,15);
+		
+		ball = new Ball(600,250,10,10,Color.BLACK,10,15);
 //		ball = new BlinkyBall(600,250,10,10,Color.BLACK,10,15);
 //		ball = new SpeedUpBall(600,250,10,10,Color.BLACK,10,15);
-		ball = new InvisibleBall(600,250,10,10,Color.BLACK,10,15);
+//		ball = new InvisibleBall(600,250,10,10,Color.BLACK,10,15);
 		leftPaddle = new Paddle(10,10,10,120,Color.RED,8);
 		rightPaddle = new Paddle(780,10,10,120,Color.RED,8);	
 		leftWall = new Wall(0,0,10,600,Color.WHITE);
@@ -111,10 +112,10 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			}
 			
 			ball.draw(graphToBack,Color.WHITE);
-//			ball = new Ball(365,300,10,10,Color.BLACK,3,2);
+			ball = new Ball(365,300,10,10,Color.BLACK,3,2);
 //			ball = new BlinkyBall(365,300,10,10,Color.BLACK,3,2);
 //			ball = new SpeedUpBall(365,300,10,10,Color.BLACK,3,2);
-			ball = new InvisibleBall(365,300,10,10,Color.BLACK,3,2);
+//			ball = new InvisibleBall(365,300,10,10,Color.BLACK,3,2);
 			ball.moveAndDraw(graphToBack);
 			
 		}

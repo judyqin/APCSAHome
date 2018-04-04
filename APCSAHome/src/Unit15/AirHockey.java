@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class AirHockey extends Canvas implements KeyListener, Runnable
 {
-	private Ball ball;
+	private SpeedUpBall ball;
 	private Paddle leftPaddle;
 	private Paddle rightPaddle;
 	private boolean[] keys;
@@ -33,7 +33,7 @@ public class AirHockey extends Canvas implements KeyListener, Runnable
 
 	public AirHockey()
 	{
-		ball = new Ball(600,250,10,10,Color.BLACK,3,4);
+		ball = new SpeedUpBall(600,250,10,10,Color.BLACK,3,4);
 		leftPaddle = new Paddle(20,10,10,120,Color.RED,8);
 		rightPaddle = new Paddle(760,10,10,120,Color.RED,8);	
 		leftGoal = new Block(10,210,10,100,Color.BLUE);
@@ -113,7 +113,7 @@ public class AirHockey extends Canvas implements KeyListener, Runnable
 			}
 			
 			ball.draw(graphToBack,Color.WHITE);
-			ball = new Ball(365,300,10,10,Color.BLACK,3,2);
+			ball = new SpeedUpBall(365,300,10,10,Color.BLACK,3,2);
 			ball.moveAndDraw(graphToBack);
 			
 		}
@@ -211,7 +211,7 @@ public class AirHockey extends Canvas implements KeyListener, Runnable
 			case 'A' : keys[2]=true; break; 
 			case 'D' : keys[3]=true; break; 
 			case 'I' : keys[4]=true; break;
-			case 'M' : keys[5]=true; break;
+			case 'K' : keys[5]=true; break;
 			case 'J' : keys[6]=true; break;
 			case 'L' : keys[7]=true; break;
 		}
@@ -226,7 +226,7 @@ public class AirHockey extends Canvas implements KeyListener, Runnable
 		case 'A' : keys[2]=false; break; 
 		case 'D' : keys[3]=false; break; 
 		case 'I' : keys[4]=false; break;
-		case 'M' : keys[5]=false; break;
+		case 'K' : keys[5]=false; break;
 		case 'J' : keys[6]=false; break;
 		case 'L' : keys[7]=false; break;
 		}
