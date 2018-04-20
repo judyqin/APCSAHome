@@ -335,64 +335,70 @@ public class Picture extends SimplePicture
   }
   
   public void copyTwo(Picture fromPic, 
-          int startRow, int startCol, int endCol, int endRow)
-{
-	Pixel fromPixel = null;
-	Pixel toPixel = null;
-	Pixel[][] toPixels = this.getPixels2D();
-	Pixel[][] fromPixels = fromPic.getPixels2D();
-	for (int fromRow = 0, toRow = startRow; 
-		fromRow < endRow &&
-		toRow < endRow; 
-		fromRow++, toRow++)
-	{
-	for (int fromCol = 0, toCol = startCol; 
-		fromCol < endCol &&
-		toCol < endCol;  
-		fromCol++, toCol++)
-	{
-	   fromPixel = fromPixels[fromRow][fromCol];
-	   toPixel = toPixels[toRow][toCol];
-	   toPixel.setColor(fromPixel.getColor());
+          int placeRow, int placeCol, int sRow, int eRow, int sCol, int eCol)
+  {
+	    Pixel fromPixel = null;
+	    Pixel toPixel = null;
+	    Pixel[][] toPixels = this.getPixels2D();
+	    Pixel[][] fromPixels = fromPic.getPixels2D();
+	    for (int fromRow = sRow, toRow = placeRow; 
+	         fromRow < eRow &&
+	         toRow < toPixels.length; 
+	         fromRow++, toRow++)
+	    {
+	      for (int fromCol = sCol, toCol = placeCol; 
+	           fromCol < eCol &&
+	           toCol < toPixels[0].length;  
+	           fromCol++, toCol++)
+	      {
+	        fromPixel = fromPixels[fromRow][fromCol];
+	        toPixel = toPixels[toRow][toCol];
+	        toPixel.setColor(fromPixel.getColor());
+	      }
+	    }   
 	  }
-	 }   
-	}
-  
 
   /** Method to create a collage of several pictures */
   public void createCollage()
   {
-    Picture flower1 = new Picture("flower1.jpg");
-    Picture flower2 = new Picture("flower2.jpg");
-    this.copy(flower1,0,0);
-    this.copy(flower2,100,0);
-    this.copy(flower1,200,0);
-    Picture flowerNoBlue = new Picture(flower2);
-    flowerNoBlue.zeroBlue();
-    this.copy(flowerNoBlue,300,0);
-    this.copy(flower1,400,0);
-    this.copy(flower2,500,0);
-    this.mirrorVertical();
-    this.write("collage.jpg");
+	  	Picture flower1 = new Picture("flower1.jpg");
+	    Picture flower2 = new Picture("flower2.jpg");
+	    this.copy(flower1,0,0);
+	    this.copy(flower2,100,0);
+	    this.copy(flower1,200,0);
+	    Picture flowerNoBlue = new Picture(flower2);
+	    flowerNoBlue.zeroBlue();
+	    this.copy(flowerNoBlue,300,0);
+	    this.copy(flower1,400,0);
+	    this.copy(flower2,500,0);
+	    this.mirrorVertical();
+	    this.write("collage.jpg");
   }
   
   public void createCollageTwo()
   {
-    Picture flower1 = new Picture("flower1.jpg");
-    Picture flower2 = new Picture("flower2.jpg");
-    this.copy(flower1,0,0);
-    this.copy(flower2,100,0);
-    this.copy(flower1,200,0);
-    Picture flowerNoBlue = new Picture(flower2);
-    flowerNoBlue.zeroBlue();
-    this.copy(flowerNoBlue,300,0);
-    this.copy(flower1,400,0);
-    this.copy(flower2,500,0);
-    this.mirrorVertical();
-    this.write("collage.jpg");
+	  Picture flower1 = new Picture("flower1.jpg");
+	  this.copyTwo(flower1,100,20,10,100,50,70);
+	  this.write("collage.jpg");
   }
   
-  
+  public void myCollage() {
+	 Picture snowman = new Picture("snowman.jpg");
+	 Picture barb = new Picture("barbaraS.jpg");
+	 Picture swan = new Picture("swan.jpg");
+	 
+	 snowman.keepOnlyBlue();
+	 barb.negate();
+	 swan.zeroBlue();
+	 
+	 this.copyTwo(snowman, 266, 123, 78, 162, 160, 242); 
+	 this.copyTwo(barb, 100, 40, 50, 64, 41, 84);
+	 this.copyTwo(swan, 300, 38, 66, 108, 310, 392);
+	 this.mirrorVertical();
+	 this.write("collage.jpg");
+	 
+  }
+
   /** Method to show large changes in color 
     * @param edgeDist the distance for finding edges
     */
@@ -419,6 +425,66 @@ public class Picture extends SimplePicture
     }
   }
   
+  public void edgeDetectionTwo(int edgeDist)
+  {
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    Pixel bottomPixel = null;
+    Pixel[][] pixels = this.getPixels2D();
+    Color rightColor = null;
+    Color bottomColor = null;
+    for (int row = 0; row < pixels.length-1; row++)
+    {
+      for (int col = 0; 
+           col < pixels[0].length-1; col++)
+      {
+        leftPixel = pixels[row][col];
+        rightPixel = pixels[row][col+1];
+        bottomPixel = pixels[row+1][col];
+        rightColor = rightPixel.getColor();
+        bottomColor = bottomPixel.getColor();
+        if (leftPixel.colorDistance(rightColor) > 
+            edgeDist)
+          leftPixel.setColor(Color.BLACK);
+        if (leftPixel.colorDistance(bottomColor) > edgeDist)
+        	leftPixel.setColor(Color.BLACK);
+        else
+          leftPixel.setColor(Color.WHITE);
+      }
+    }
+  }
+  
+  public void edgeDetectionThree(int edgeDist)
+  {
+	    Pixel leftPixel = null;
+	    Pixel rightPixel = null;
+	    Pixel topPixel = null;
+	    Pixel[][] pixels = this.getPixels2D();
+	    Color rightColor = null;
+	    Color topColor = null;
+	    for (int row = 1; row < pixels.length; row++)
+	    {
+	      for (int col = 0; 
+	           col < pixels[0].length-1; col++)
+	      {
+	        leftPixel = pixels[row][col];
+	        rightPixel = pixels[row][col+1];
+	        topPixel = pixels[row-1][col];
+	        rightColor = rightPixel.getColor();
+	        topColor = topPixel.getColor();
+	        if (leftPixel.colorDistance(rightColor) > 
+	            edgeDist) 
+	          leftPixel.setColor(Color.WHITE);
+	        if (leftPixel.colorDistance(topColor) > edgeDist)
+	          leftPixel.setColor(Color.WHITE);
+//	        if (leftPixel.colorDistance(rightColor) > 
+//            edgeDist && leftPixel.colorDistance(topColor) > edgeDist)
+//              leftPixel.setColor(Color.BLACK);
+	        else
+	          leftPixel.setColor(Color.BLACK);
+	      }
+	    }
+	  }
   
   /* Main method for testing - each class in Java can have a main 
    * method 
