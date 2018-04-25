@@ -131,6 +131,7 @@ public class Picture extends SimplePicture
 	  }
   }
   
+  
   public void fixUnderwater(){
 	  Pixel[][] pixels = this.getPixels2D();
 	    for (Pixel[] rowArray : pixels)
@@ -485,6 +486,56 @@ public class Picture extends SimplePicture
 	      }
 	    }
 	  }
+   
+  public void blur(int x, int y, int width, int height)
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel p = null;
+	  Pixel rightPixel = null;
+	  Pixel bottomPixel = null;
+	  
+	  for (int row = y; row < y + height - 3; row++)
+	  {
+	    for (int col = x; col < x + width - 3; col++)
+	    {
+	    	p = pixels[row][col];
+	    	
+	    	int one = col + 1;
+	    	int two = row + 1;
+	    	
+	    	rightPixel = pixels[row][one];
+	    	bottomPixel = pixels[two][col];
+	    	
+	    	while (rightPixel.getColor() == p.getColor()){
+	    		
+	    		rightPixel = pixels[row][one];
+	    		one++;
+	    	} 
+	    	while (bottomPixel.getColor() == p.getColor()){
+	    		
+		    	bottomPixel = pixels[two][col];
+	    		two++;
+	    	}
+	    	
+	    	int avgRed = (p.getRed() + rightPixel.getRed() + bottomPixel.getRed()) / 3;
+	    	int avgBlue = (p.getBlue() + rightPixel.getBlue() + bottomPixel.getBlue()) / 3;
+	    	int avgGreen = (p.getGreen() + rightPixel.getGreen() + bottomPixel.getGreen()) / 3;
+	    	
+	    	p.setRed(avgRed);
+	    	p.setBlue(avgBlue);
+	    	p.setGreen(avgGreen);
+	    	
+	    	rightPixel.setRed(avgRed);
+	    	rightPixel.setBlue(avgBlue);
+	    	rightPixel.setGreen(avgGreen);
+	    	
+	    	bottomPixel.setRed(avgRed);
+	    	bottomPixel.setBlue(avgBlue);
+	    	bottomPixel.setGreen(avgGreen);
+	    }
+	  }
+  }
+ 
   
   /* Main method for testing - each class in Java can have a main 
    * method 

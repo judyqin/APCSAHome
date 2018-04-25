@@ -155,6 +155,16 @@ public class PictureTester
   }
   
   
+	public static void testBlur()
+	{
+		Picture beach = new Picture("beach.jpg");
+		beach.explore();
+		beach.blur(125, 120, 290, 230);
+		beach.explore();
+		beach.blur(42, 52, 260, 180);
+		beach.explore();
+	}
+  
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
@@ -179,11 +189,13 @@ public class PictureTester
     //testMirrorDiagonal();
     //testCollage();
     //testCollageTwo(); 
-	//testMyCollage(); 
+	//testMyCollage();
+	//testAvg();
+	testBlur(); 
     //testCopy();
     //testEdgeDetection();
 	//testEdgeDetection2();
-    testEdgeDetection3(); 
+    //testEdgeDetection3(); 
     //testChromakey();
     //testEncodeAndDecode();
     //testGetCountRedOverValue(250);
