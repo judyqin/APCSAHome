@@ -146,6 +146,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			for (int j = 0; j < alienmat.length; j++) {
 				for (int k = 0; k < alienmat.length; k++) {
 					if (shots.get(i).getX() > alienmat[j][k].getX() && shots.get(i).getX() < alienmat[j][k].getX()+200 && shots.get(i).getY() == alienmat[j][k].getY()) {
+						shots.get(i).setPos(1000, 1000);
 						alienmat[j][k].setPos(1000,1000);
 					}
 				}
