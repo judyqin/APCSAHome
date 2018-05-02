@@ -3,6 +3,7 @@ package MemoryGame;
 import java.awt.Color;
 import java.awt.Graphics;
 
+
 public abstract class Square implements Locatable {
 
 	private int xPos;
@@ -17,7 +18,7 @@ public abstract class Square implements Locatable {
 	public Square(int x, int y)
 	{
 		xPos = x; 
-		yPos = y; 
+		yPos = y;
 	}
 
 	public void setPos( int x, int y)
@@ -48,7 +49,13 @@ public abstract class Square implements Locatable {
 	{
 		return yPos;
 	}
+
 	
 	public abstract void draw(Graphics window);
+	
+	public String toString()
+	{
+		return "";
+	}
 	
 }

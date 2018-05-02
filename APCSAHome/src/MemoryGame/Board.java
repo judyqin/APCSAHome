@@ -9,46 +9,41 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import Unit17.Alien;
-import Unit17.Aliens;
-import Unit17.Ammo;
-import Unit17.Ship;
-
-public class Board extends Canvas implements KeyListener, Runnable {
-
-	private Ship ship;
-	private Alien alienOne;
-	private Alien alienTwo;
-
+public class Board extends Canvas implements Runnable {
+	
 //uncomment once you are ready for this part
 
-	private ArrayList<Alien> aliens;
-	private ArrayList<Ammo> shots;
-	private Aliens a; 
-	private Alien[][] alienmat; 
+	private BalloonsCard balloon, balloon2; 
+	private BeachCard beach, beach2; 
+	private CupcakeCard cup, cup2; 
+	private DogCard dog, dog2; 
+	private FlowerCard flower, flower2; 
+	private HouseCard house, house2; 
+	private IceCreamCard ic, ic2; 
+	private PigCard pg, pg2; 
+	
 
-	private boolean[] keys;
 	private BufferedImage back;
 
 	public Board()
 	{
-		setBackground(Color.black);
-
-		keys = new boolean[5];
-
-		//instantiate other stuff
-		ship = new Ship(350,430,5);
-//		alienOne = new Alien(100,80,3);
-//		alienTwo = new Alien(230,80,3);
-//		aliens = new ArrayList<Alien>(); 
-		shots = new ArrayList<Ammo>();
-		a = new Aliens(20,20,3);
-		alienmat = a.alienMatrix(); 
+		setBackground(Color.WHITE);
 		
-//		aliens.add(new Alien(100,80,3));
-//		aliens.add(new Alien(230,80,3));
+		balloon = new BalloonsCard(200, 150);
+		beach = new BeachCard(400, 150);
+//		cup = new CupcakeCard(600, 150);
+//		dog = new DogCard(800, 150); 
+//		flower = new FlowerCard(200, 300); 
+//		house = new HouseCard(400, 300);
+//		ic = new IceCreamCard(600, 300);
+//		pg = new PigCard(800, 300);
+		balloon2 = new BalloonsCard(400, 300);
+		beach2 = new BeachCard(200, 300);
 
-		this.addKeyListener(this);
+	
+		//instantiate other stuff
+
+
 		new Thread(this).start();
 
 		setVisible(true);
@@ -59,7 +54,7 @@ public class Board extends Canvas implements KeyListener, Runnable {
 	   paint(window);
    }
 
-	public void paint( Graphics window )
+   public void paint( Graphics window )
 	{
 		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
@@ -73,165 +68,24 @@ public class Board extends Canvas implements KeyListener, Runnable {
 		//we will draw all changes on the background image
 		Graphics graphToBack = back.createGraphics();
 
-		graphToBack.setColor(Color.BLUE);
-		graphToBack.drawString("StarFighter ", 25, 50 );
-		graphToBack.setColor(Color.BLACK);
-		graphToBack.fillRect(0,0,800,600);
-		ship.draw(graphToBack);
-//		alienOne.draw(graphToBack);
-//		alienTwo.draw(graphToBack);
-//		alienOne.move("LEFT");
-//		alienTwo.move("LEFT");
-//		
-//		for (int i = 0; i < aliens.size(); i++) {
-//			aliens.get(i).draw(graphToBack);
-//			aliens.get(i).move("LEFT");
-//		}
+		window.setColor(Color.BLACK);
+		window.drawString("MEMORY GAME ", 25, 50 );
+		window.setColor(Color.PINK);
+//		window.drawRect(200, 150, 240, 300);
+		balloon.draw(window);
+		beach.draw(window);
+//		cup.draw(window);
+//		dog.draw(window);
+//		flower.draw(window);
+//		house.draw(window);
+//		ic.draw(window);
+//		pg.draw(window);
+		balloon2.draw(window);
+		beach2.draw(window);	
 		
-		for (int i = 0; i < alienmat.length; i++) {
-			for (int j = 0; j < alienmat.length; j++) {
-				alienmat[i][j].move("LEFT");
-				alienmat[i][j].draw(graphToBack);
-			}
-		}
-		
-//		ammo.draw(graphToBack);
-
-		if(keys[0] == true)
-		{
-			ship.move("LEFT");
-		}
-		if(keys[1] == true)
-		{
-			ship.move("RIGHT");
-		}
-		if(keys[2] == true)
-		{
-			ship.move("UP");
-		}
-		if(keys[3] == true)
-		{
-			ship.move("DOWN");
-		}
-		if(keys[4] == true) {
-			Ammo a = new Ammo(ship.getX()+35, ship.getY(), 2);
-			shots.add(a);
-			keys[4] = false; 
+	}
+   
  
-		}
-
-
-		for (int i = 0; i < shots.size(); i++) {
-				
-			shots.get(i).draw(graphToBack);
-			shots.get(i).move("UP");
-
-//			if (shots.get(i).getX() > alienOne.getX() && shots.get(i).getX() < alienOne.getX()+200 && shots.get(i).getY() == alienOne.getY()) {
-//				alienOne.setPos(1000,1000);
-//			}
-//			if (shots.get(i).getX() > alienTwo.getX() && shots.get(i).getX() < alienTwo.getX()+200 && shots.get(i).getY() == alienTwo.getY()) {
-//				alienTwo.setPos(1000,1000);
-//			}
-//			for (int j = 0; j < aliens.size(); j++) { 
-//				if (shots.get(i).getX() > aliens.get(j).getX() && shots.get(i).getX() < aliens.get(j).getX()+200 && shots.get(i).getY() == aliens.get(j).getY()) {
-//					aliens.get(j).setPos(1000,1000);
-//				}
-//			}
-			
-			for (int j = 0; j < alienmat.length; j++) {
-				for (int k = 0; k < alienmat.length; k++) {
-					if (shots.get(i).getX() > alienmat[j][k].getX() && shots.get(i).getX() < alienmat[j][k].getX()+200 && shots.get(i).getY() == alienmat[j][k].getY()) {
-						shots.get(i).setPos(1000, 1000);
-						alienmat[j][k].setPos(1000,1000);
-					}
-				}
-			}
-			
-		}
-		
-		//add in collision detection
-//		if(!(alienOne.getX()>=0 && alienOne.getX()<=590))
-//		{
-//			alienOne.setSpeed(-alienOne.getSpeed());
-//		}
-//		if(!(alienTwo.getX()>=130 && alienTwo.getX()<=720))
-//		{
-//			alienTwo.setSpeed(-alienTwo.getSpeed());
-//		}
-		
-//		for (int i = 0; i < aliens.size(); i++) {
-//			if (!(aliens.get(i).getX()>=0 && aliens.get(i).getX()<=720)) {
-//				aliens.get(i).setSpeed(-aliens.get(i).getSpeed());
-//			}
-//		}
-		
-		for (int i = 0; i < alienmat.length; i++) {
-			for (int j = 0; j < alienmat.length; j++) {
-				if (!(alienmat[i][j].getX()>=0 && alienmat[i][j].getX()<=720)) {
-					alienmat[i][j].setSpeed(-alienmat[i][j].getSpeed());
-				}
-			}
-		}
-		
-		twoDGraph.drawImage(back, null, 0, 0);
-	}
-
-
-	public void keyPressed(KeyEvent e)
-	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			keys[0] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			keys[1] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			keys[2] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			keys[3] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		{
-			keys[4] = true;
-		}
-		repaint();
-	}
-
-	public void keyReleased(KeyEvent e)
-	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			keys[0] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			keys[1] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			keys[2] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			keys[3] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		{
-			keys[4] = false;
-		}
-		repaint();
-	}
-
-	public void keyTyped(KeyEvent e)
-	{
-
-	}
-
    public void run()
    {
    	try
@@ -245,4 +99,5 @@ public class Board extends Canvas implements KeyListener, Runnable {
       {
       }
   	}
+   
 }
