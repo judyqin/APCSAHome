@@ -4,18 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Canvas;
-//import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
-//import java.awt.event.ActionListener;
-//import java.util.ArrayList;
-//import java.util.Scanner;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Board extends Canvas implements Runnable, KeyListener {
-	
-	private static final long serialVersionUID = 1L;
+
 //uncomment once you are ready for this part
 
 	private BalloonsCard balloon, balloon2; 
@@ -28,10 +27,6 @@ public class Board extends Canvas implements Runnable, KeyListener {
 	private PigCard pg, pg2; 
 	private PinkCards pinks; 
 	private PinkCard[][] pinkmat; 
-//	private int r1 = (int)(Math.random() * 4);
-//	private int r2 = (int)(Math.random() * 4);
-//	private int r3 = (int)(Math.random() * 4);
-//	private int r4 = (int)(Math.random() * 4);
 	public boolean holding = false; 
 	public boolean title = true; 
 	public boolean match = false; 
@@ -97,22 +92,22 @@ public class Board extends Canvas implements Runnable, KeyListener {
 		graphToBack.drawString("Press space to begin!", 25, 150);
 
 		
-		if(keys[0] == true && holding == false)
+		if(keys[0])
 		{
-			System.out.println("space");
 			title = false; 
 		}
 		
 		if (title == false) {
+			
 			graphToBack.setColor(Color.WHITE);
 			graphToBack.drawString("MEMORY GAME ", 25, 50 );
 			graphToBack.drawString("If you see a matching pair, type the two numbers as prompted in the console.", 25, 100); 
 			graphToBack.drawString("Press space to begin!", 25, 150);
-		}
+	
+		} 
 		
 		if (keys[0] && holding == false) {
-			System.out.println("initialize");
-			
+			System.out.println("hi");
 			balloon.draw(graphToBack);
 			beach.draw(graphToBack);
 			cup.draw(graphToBack);
@@ -129,23 +124,18 @@ public class Board extends Canvas implements Runnable, KeyListener {
 			house2.draw(graphToBack);
 			ic2.draw(graphToBack);
 			pg2.draw(graphToBack);
-			
-			
+				
 			for (int i = 0; i < pinkmat.length; i++) {
 				for (int j = 0; j < pinkmat[i].length; j++) {
 					pinkmat[i][j].draw(graphToBack);
 				}
 			}
-//			pinkmat = pinks.rand();
-			
-			holding = true;
+			pinkmat = pinks.rand(); 
+			holding = true; 
 		}
 		
 		if (!keys[0]) {
-			holding = false;
-		}
-		
-		if (!keys[3]) {
+			
 			holding = false;
 		}
 		
@@ -156,20 +146,40 @@ public class Board extends Canvas implements Runnable, KeyListener {
 //		if (keys[2] == true) {
 //			not = true; 
 //		}
-		
-		if (keys[3] == true) {
+//		
+		if (keys[3]) {
 			start = true; 
-			System.out.println("s key");
 		}
 		
 		if (start == true) {
+			System.out.println(keys[3]);
+			balloon.draw(graphToBack);
+			beach.draw(graphToBack);
+			cup.draw(graphToBack);
+			dog.draw(graphToBack);
+			flower.draw(graphToBack);
+			house.draw(graphToBack);
+			ic.draw(graphToBack);
+			pg.draw(graphToBack);
+			balloon2.draw(graphToBack);
+			beach2.draw(graphToBack);	
+			cup2.draw(graphToBack);
+			dog2.draw(graphToBack);
+			flower2.draw(graphToBack);
+			house2.draw(graphToBack);
+			ic2.draw(graphToBack);
+			pg2.draw(graphToBack);
+				
+			for (int i = 0; i < pinkmat.length; i++) {
+				for (int j = 0; j < pinkmat[i].length; j++) {
+					pinkmat[i][j].draw(graphToBack);
+				}
+			}
+			
 			pinkmat = pinks.rand();
+			start = true; 
 		}
-		
-		if (keys[3] && holding == false) {
-			System.out.println("s key");
-		}
-		
+
 //		if (match == true) {
 //			System.out.println("hey");
 //		}

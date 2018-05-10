@@ -84,32 +84,49 @@ public class PinkCards extends PinkCard {
 		return p; 
 	}
 	
-	public PinkCard[][] flip(int r, int c, int r1, int c1) {
-		p[r][c].setPos(1000, 1000);
-		p[r1][c1].setPos(1000, 1000);
-		return p; 
-	}
-	
-	public PinkCard[][] flip1() {
-		flip(0,0,3,0);
-		return p; 
-	}
-	
-	public int getrand1() {
-		return r1; 
-	}
-	
-	public int getrand2() {
-		return r2; 
-	}
-	
-	public int getrand3() {
-		return r3; 
-	}
-	
-	public int getrand4() {
-		return r4; 
-	}
+//	public PinkCard[][] flip(int r, int c, int r1, int c1) {
+//		ran1 = r; 
+//		ran2 = c; 
+//		ran3 = r1; 
+//		ran4 = c1; 
+//		p[r][c].setPos(1000, 1000);
+//		p[r1][c1].setPos(1000, 1000);
+//		return p; 
+//	}
+//	
+//	public PinkCard[][] flip1() {
+//		flip(0,0,3,0);
+//		return p; 
+//	}
+//	
+//	public PinkCard[][] flip2() {
+//		flip(0,1,2,2);
+//		return p; 
+//	}
+//	
+//	public PinkCard[][] flip3() {
+//		flip(1,1,1,0);
+//		return p; 
+//	}
+//	
+//	
+//	public int getrand1() {
+//		return ran1; 
+//	}
+//	
+//	public int getrand2() {
+//		return ran2; 
+//	}
+//	
+//	public int getrand3() {
+//		return ran3; 
+//	}
+//	
+//	public int getrand4() {
+//		return ran4; 
+//	}
+
+
 	
 //	public PinkCard[][] remove(PinkCard[][] array) {
 //
