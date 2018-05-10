@@ -1,18 +1,21 @@
 package MemoryGame;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
+import java.awt.Canvas;
+//import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Random; 
+//import java.awt.event.ActionListener;
+//import java.util.ArrayList;
+//import java.util.Scanner;
 
-
-public class Board extends Canvas implements Runnable {
+public class Board extends Canvas implements Runnable, KeyListener {
 	
+	private static final long serialVersionUID = 1L;
 //uncomment once you are ready for this part
 
 	private BalloonsCard balloon, balloon2; 
@@ -25,13 +28,24 @@ public class Board extends Canvas implements Runnable {
 	private PigCard pg, pg2; 
 	private PinkCards pinks; 
 	private PinkCard[][] pinkmat; 
-	private int rand1, rand2, rand3, rand4; 
+//	private int r1 = (int)(Math.random() * 4);
+//	private int r2 = (int)(Math.random() * 4);
+//	private int r3 = (int)(Math.random() * 4);
+//	private int r4 = (int)(Math.random() * 4);
+	public boolean holding = false; 
+	public boolean title = true; 
+	public boolean match = false; 
+	public boolean not = false; 
+	public boolean start = false; 
 
+	private boolean[] keys;
 	private BufferedImage back;
 
 	public Board()
 	{
 		setBackground(Color.WHITE);
+		
+		keys = new boolean[4];
 		
 		balloon = new BalloonsCard(200, 150);
 		beach = new BeachCard(400, 150);
@@ -51,14 +65,8 @@ public class Board extends Canvas implements Runnable {
 		ic2 = new IceCreamCard(800, 600);
 		pinks = new PinkCards(200, 150);
 		pinkmat = pinks.pMatrix(); 
-//		rand1 = (int)(Math.random() * 4 + 1);
-//		rand2 = (int)(Math.random() * 4 + 1);
-//		rand3 = (int)(Math.random() * 4 + 1);
-//		rand4 = (int)(Math.random() * 4 + 1);
-		
-		//instantiate other stuff
 
-
+		this.addKeyListener(this);
 		new Thread(this).start();
 
 		setVisible(true);
@@ -70,7 +78,7 @@ public class Board extends Canvas implements Runnable {
    }
 
    public void paint( Graphics window )
-	{
+	{	   
 		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
 
@@ -82,36 +90,137 @@ public class Board extends Canvas implements Runnable {
 		//create a graphics reference to the back ground image
 		//we will draw all changes on the background image
 		Graphics graphToBack = back.createGraphics();
+		
+		graphToBack.setColor(Color.BLACK);
+		graphToBack.drawString("MEMORY GAME ", 25, 50 );
+		graphToBack.drawString("If you see a matching pair, type the two numbers as prompted in the console.", 25, 100);
+		graphToBack.drawString("Press space to begin!", 25, 150);
 
-		window.setColor(Color.BLACK);
-		window.drawString("MEMORY GAME ", 25, 50 );
-		window.setColor(Color.PINK);
-		balloon.draw(window);
-		beach.draw(window);
-		cup.draw(window);
-		dog.draw(window);
-		flower.draw(window);
-		house.draw(window);
-		ic.draw(window);
-		pg.draw(window);
-		balloon2.draw(window);
-		beach2.draw(window);	
-		cup2.draw(window);
-		dog2.draw(window);
-		flower2.draw(window);
-		house2.draw(window);
-		ic2.draw(window);
-		pg2.draw(window);
 		
-		for (int i = 0; i < pinkmat.length; i++) {
-			for (int j = 0; j < pinkmat[i].length; j++) {
-				pinkmat[i][j].draw(window);
-			}
+		if(keys[0] == true && holding == false)
+		{
+			System.out.println("space");
+			title = false; 
 		}
-	
 		
+		if (title == false) {
+			graphToBack.setColor(Color.WHITE);
+			graphToBack.drawString("MEMORY GAME ", 25, 50 );
+			graphToBack.drawString("If you see a matching pair, type the two numbers as prompted in the console.", 25, 100); 
+			graphToBack.drawString("Press space to begin!", 25, 150);
+		}
+		
+		if (keys[0] && holding == false) {
+			System.out.println("initialize");
+			
+			balloon.draw(graphToBack);
+			beach.draw(graphToBack);
+			cup.draw(graphToBack);
+			dog.draw(graphToBack);
+			flower.draw(graphToBack);
+			house.draw(graphToBack);
+			ic.draw(graphToBack);
+			pg.draw(graphToBack);
+			balloon2.draw(graphToBack);
+			beach2.draw(graphToBack);	
+			cup2.draw(graphToBack);
+			dog2.draw(graphToBack);
+			flower2.draw(graphToBack);
+			house2.draw(graphToBack);
+			ic2.draw(graphToBack);
+			pg2.draw(graphToBack);
+			
+			
+			for (int i = 0; i < pinkmat.length; i++) {
+				for (int j = 0; j < pinkmat[i].length; j++) {
+					pinkmat[i][j].draw(graphToBack);
+				}
+			}
+//			pinkmat = pinks.rand();
+			
+			holding = true;
+		}
+		
+		if (!keys[0]) {
+			holding = false;
+		}
+		
+		if (!keys[3]) {
+			holding = false;
+		}
+		
+//		if(keys[1] == true) {
+//			match = true; 
+//		}
+//		
+//		if (keys[2] == true) {
+//			not = true; 
+//		}
+		
+		if (keys[3] == true) {
+			start = true; 
+			System.out.println("s key");
+		}
+		
+		if (start == true) {
+			pinkmat = pinks.rand();
+		}
+		
+		if (keys[3] && holding == false) {
+			System.out.println("s key");
+		}
+		
+//		if (match == true) {
+//			System.out.println("hey");
+//		}
+//		
+//		if (!keys[1]) {
+//			match = false;
+//		}
+		
+//		if (not == true) {
+//			System.out.println("bye");
+//			not = false; 
+//		}
+		
+		twoDGraph.drawImage(back, null, 0, 0);
 	}
    
+   
+   public void keyPressed(KeyEvent e)
+   {
+		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+		{
+			keys[0] = true;
+		}
+		switch(toUpperCase(e.getKeyChar()))
+		{
+			case 'Y' : keys[1]=true; break;
+			case 'N' : keys[2]=true; break;
+			case 'S' : keys[3]=true; break;
+		}
+		repaint();
+	}
+
+	public void keyReleased(KeyEvent e)
+	{
+		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+		{
+			keys[0] = false;
+		}
+		switch(toUpperCase(e.getKeyChar()))
+		{
+			case 'Y' : keys[1]=false; break;
+			case 'N' : keys[2]=false; break;
+			case 'S' : keys[3]=false; break; 
+			
+		}
+		repaint();
+	}
+
+	public void keyTyped(KeyEvent e)
+	{
+	}
  
    public void run()
    {
@@ -125,6 +234,6 @@ public class Board extends Canvas implements Runnable {
       }catch(Exception e)
       {
       }
-  	}
+  	} 
    
 }
