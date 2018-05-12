@@ -159,14 +159,14 @@ public class PinkCards extends PinkCard {
 //		return arr; 
 //	}
 //	
-	public int r1() {
-		return r1; 
-	}
-	
-	public int r2() {
-		return r2; 
-	}
-	
+//	public int r1() {
+//		return r1; 
+//	}
+//	
+//	public int r2() {
+//		return r2; 
+//	}
+//	
 }
 
 //EXTRA CODE THAT DIDN'T END UP WORKING
