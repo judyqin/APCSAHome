@@ -68,9 +68,10 @@ public class Board extends Canvas implements Runnable, KeyListener {
 
 		{
 			graphToBack.setColor(Color.BLACK);
-			graphToBack.drawString("MATCHING GAME ", 25, 50 );
-			graphToBack.drawString("If you see a matching pair, please press Y, if not a matching pair, please press N", 25, 100);
-			graphToBack.drawString("Press Space key to begin!", 25, 150);
+			graphToBack.drawString("Judy Qin Period 4", 25, 50);
+			graphToBack.drawString("MATCHING GAME ", 25, 100 );
+			graphToBack.drawString("If you see a matching pair, please press Y, if not a matching pair, please press N", 25, 150);
+			graphToBack.drawString("Press Space key to begin!", 25, 200);
 		}
 		
 		if(keys[0] == true && !initialized)
