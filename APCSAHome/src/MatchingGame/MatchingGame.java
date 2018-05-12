@@ -3,12 +3,12 @@ import javax.swing.JFrame;
 import java.awt.Component;
 import java.util.Scanner;
 
-public class MemoryGame extends JFrame
+public class MatchingGame extends JFrame
 {
 	private static final int WIDTH = 1200;
 	private static final int HEIGHT = 1300;
 
-	public MemoryGame()
+	public MatchingGame()
 	{
 		super("MEMORY GAME");
 		setSize(WIDTH,HEIGHT);
@@ -23,7 +23,7 @@ public class MemoryGame extends JFrame
 
 	public static void main( String args[] )
 	{
-		MemoryGame run = new MemoryGame();
+		MatchingGame run = new MatchingGame();
 //		int ans1, ans2; 
 //		boolean ans = false; 
 //	
