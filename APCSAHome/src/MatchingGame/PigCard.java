@@ -22,7 +22,7 @@ public class PigCard extends Square
 		back = new PinkCard(x, y);
 		try
 		{
-			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MemoryGame/pig.JPG"));
+			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MatchingGame/pig.JPG"));
 
 		}
 		catch(Exception e)

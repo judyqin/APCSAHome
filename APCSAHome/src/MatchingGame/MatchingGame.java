@@ -10,7 +10,7 @@ public class MatchingGame extends JFrame
 
 	public MatchingGame()
 	{
-		super("MEMORY GAME");
+		super("MATCHING GAME");
 		setSize(WIDTH,HEIGHT);
 
 		Board theGame = new Board();

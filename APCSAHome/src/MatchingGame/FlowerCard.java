@@ -22,7 +22,7 @@ public class FlowerCard extends Square
 		back = new PinkCard(x, y);
 		try
 		{
-			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MemoryGame/flower.JPG"));
+			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MatchingGame/flower.JPG"));
 		}
 		catch(Exception e)
 		{

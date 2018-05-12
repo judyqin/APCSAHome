@@ -22,7 +22,7 @@ public class BalloonsCard extends Square
 		back = new PinkCard(x, y);
 		try
 		{
-			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MemoryGame/balloons.JPG"));
+			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MatchingGame/balloons.JPG"));
 
 		}
 		catch(Exception e)

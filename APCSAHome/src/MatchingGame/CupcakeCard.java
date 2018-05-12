@@ -22,7 +22,7 @@ public class CupcakeCard extends Square
 		back = new PinkCard(x, y);
 		try
 		{
-			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MemoryGame/cupcake.JPG"));
+			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MatchingGame/cupcake.JPG"));
 
 		}
 		catch(Exception e)

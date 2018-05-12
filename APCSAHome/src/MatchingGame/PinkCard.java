@@ -20,7 +20,7 @@ public class PinkCard extends Square
 		super(x, y);
 		try
 		{
-			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MemoryGame/pink.JPG"));
+			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MatchingGame/pink.JPG"));
 
 		}
 		catch(Exception e)
