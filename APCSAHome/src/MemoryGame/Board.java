@@ -1,37 +1,31 @@
 package MemoryGame;
 
+import static java.lang.Character.toUpperCase;
+
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Canvas;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-import static java.lang.Character.*;
+//import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionListener;
+//import java.util.ArrayList;
+//import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Board extends Canvas implements Runnable, KeyListener {
-
-//uncomment once you are ready for this part
-
-	private BalloonsCard balloon, balloon2; 
-	private BeachCard beach, beach2; 
-	private CupcakeCard cup, cup2; 
-	private DogCard dog, dog2; 
-	private FlowerCard flower, flower2; 
-	private HouseCard house, house2; 
-	private IceCreamCard ic, ic2; 
-	private PigCard pg, pg2; 
-	private PinkCards pinks; 
+	
+	private PinkCards pinks = new PinkCards(200, 150); ;
 	private PinkCard[][] pinkmat; 
-	public boolean holding = false; 
+	public boolean initialized = false; 
 	public boolean title = true; 
 	public boolean match = false; 
-	public boolean not = false; 
-	public boolean start = false; 
+	public boolean notMatch = false; 
+	public boolean isCardFlipped = false; 
+	public boolean gameStart = false;
+	public int pairsleft = 8; 
 
 	private boolean[] keys;
 	private BufferedImage back;
@@ -42,23 +36,6 @@ public class Board extends Canvas implements Runnable, KeyListener {
 		
 		keys = new boolean[4];
 		
-		balloon = new BalloonsCard(200, 150);
-		beach = new BeachCard(400, 150);
-		cup = new CupcakeCard(600, 150);
-		dog = new DogCard(800, 150);
-		flower2 = new FlowerCard(200, 300);
-		ic = new IceCreamCard(400, 300);
-		pg = new PigCard(600, 300);
-		flower = new FlowerCard(800, 300);
-		cup2 = new CupcakeCard(200, 450); 
-		house = new HouseCard(400, 450);
-		beach2 = new BeachCard(600, 450);
-		pg2 = new PigCard(800, 450);
-		dog2 = new DogCard(200, 600);
-		balloon2 = new BalloonsCard(400, 600);
-		house2 = new HouseCard(600, 600);
-		ic2 = new IceCreamCard(800, 600);
-		pinks = new PinkCards(200, 150);
 		pinkmat = pinks.pMatrix(); 
 
 		this.addKeyListener(this);
@@ -75,7 +52,7 @@ public class Board extends Canvas implements Runnable, KeyListener {
    public void paint( Graphics window )
 	{	   
 		//set up the double buffering to make the game animation nice and smooth
-		Graphics2D twoDGraph = (Graphics2D)window;
+ 		Graphics2D twoDGraph = (Graphics2D)window;
 
 		//take a snap shop of the current screen and same it as an image
 		//that is the exact same width and height as the current screen
@@ -84,114 +61,116 @@ public class Board extends Canvas implements Runnable, KeyListener {
 
 		//create a graphics reference to the back ground image
 		//we will draw all changes on the background image
+		
 		Graphics graphToBack = back.createGraphics();
 		
-		graphToBack.setColor(Color.BLACK);
-		graphToBack.drawString("MEMORY GAME ", 25, 50 );
-		graphToBack.drawString("If you see a matching pair, type the two numbers as prompted in the console.", 25, 100);
-		graphToBack.drawString("Press space to begin!", 25, 150);
+		if(initialized == false)
 
-		
-		if(keys[0])
 		{
-			title = false; 
-		}
-		
-		if (title == false) {
-			
-			graphToBack.setColor(Color.WHITE);
+			graphToBack.setColor(Color.BLACK);
 			graphToBack.drawString("MEMORY GAME ", 25, 50 );
-			graphToBack.drawString("If you see a matching pair, type the two numbers as prompted in the console.", 25, 100); 
-			graphToBack.drawString("Press space to begin!", 25, 150);
-	
-		} 
-		
-		if (keys[0] && holding == false) {
-			System.out.println("hi");
-			balloon.draw(graphToBack);
-			beach.draw(graphToBack);
-			cup.draw(graphToBack);
-			dog.draw(graphToBack);
-			flower.draw(graphToBack);
-			house.draw(graphToBack);
-			ic.draw(graphToBack);
-			pg.draw(graphToBack);
-			balloon2.draw(graphToBack);
-			beach2.draw(graphToBack);	
-			cup2.draw(graphToBack);
-			dog2.draw(graphToBack);
-			flower2.draw(graphToBack);
-			house2.draw(graphToBack);
-			ic2.draw(graphToBack);
-			pg2.draw(graphToBack);
-				
-			for (int i = 0; i < pinkmat.length; i++) {
-				for (int j = 0; j < pinkmat[i].length; j++) {
-					pinkmat[i][j].draw(graphToBack);
-				}
-			}
-			pinkmat = pinks.rand(); 
-			holding = true; 
+			graphToBack.drawString("If you see a matching pair, please press Y, if not a matching pair, please press N", 25, 100);
+			graphToBack.drawString("Press Space key to begin!", 25, 150);
 		}
 		
-		if (!keys[0]) {
+		if(keys[0] == true && !initialized)
+		{
+			System.out.println("Space key pressed");
+			System.out.println("Canvas initialized");
+			initialized = true;
+			graphToBack.clearRect(0, 0, 800, 800);
 			
-			holding = false;
-		}
-		
-//		if(keys[1] == true) {
-//			match = true; 
-//		}
-//		
-//		if (keys[2] == true) {
-//			not = true; 
-//		}
-//		
-		if (keys[3]) {
-			start = true; 
-		}
-		
-		if (start == true) {
-			System.out.println(keys[3]);
-			balloon.draw(graphToBack);
-			beach.draw(graphToBack);
-			cup.draw(graphToBack);
-			dog.draw(graphToBack);
-			flower.draw(graphToBack);
-			house.draw(graphToBack);
-			ic.draw(graphToBack);
-			pg.draw(graphToBack);
-			balloon2.draw(graphToBack);
-			beach2.draw(graphToBack);	
-			cup2.draw(graphToBack);
-			dog2.draw(graphToBack);
-			flower2.draw(graphToBack);
-			house2.draw(graphToBack);
-			ic2.draw(graphToBack);
-			pg2.draw(graphToBack);
-				
 			for (int i = 0; i < pinkmat.length; i++) {
 				for (int j = 0; j < pinkmat[i].length; j++) {
 					pinkmat[i][j].draw(graphToBack);
 				}
 			}
 			
-			pinkmat = pinks.rand();
-			start = true; 
-		}
-
-//		if (match == true) {
-//			System.out.println("hey");
-//		}
-//		
-//		if (!keys[1]) {
-//			match = false;
-//		}
+			graphToBack.drawString("Please press S key to flip two cards", 25, 50 );
 		
-//		if (not == true) {
-//			System.out.println("bye");
-//			not = false; 
-//		}
+		}
+		
+		if(keys[3] && !isCardFlipped)
+		{
+			System.out.println("S key is pressed");
+			gameStart = true;
+			isCardFlipped = true;
+			ArrayList<Square> twoFlipCard = pinks.rand();
+			twoFlipCard.get(0).draw(graphToBack);
+			twoFlipCard.get(1).draw(graphToBack);
+			
+			graphToBack.clearRect(0, 0, 800, 50);
+			graphToBack.drawString("If two cards match, please press Y key", 25, 50 );
+			graphToBack.drawString("If two cards do NOT match, please press N key", 25, 100);
+		}
+		
+		if(keys[1] && isCardFlipped)
+		{
+			System.out.println("Two cards match, Y key is pressed");
+			isCardFlipped = false;
+			if(!pinks.getTwoFlipCardsPair().get(0).getClass().equals(pinks.getTwoFlipCardsPair().get(1).getClass()))
+			{
+				System.out.println("But they are not matching cards");
+				graphToBack.setColor(Color.WHITE);
+				graphToBack.fillRect(0, 0, 1300, 1300);
+				graphToBack.setColor(Color.BLACK);
+				graphToBack.drawString("YOU INCORRECTLY ANSWERED! THERE WAS NOT A MATCH!", 400, 300);
+				return;
+			}
+			else
+			{
+				match = true;
+				int xPos1 = pinks.getTwoFlipCardsPair().get(0).getxPos();
+				int yPos1 = pinks.getTwoFlipCardsPair().get(0).getyPos();
+				graphToBack.clearRect(xPos1, yPos1, 150, 150);
+				
+				int xPos2 = pinks.getTwoFlipCardsPair().get(1).getxPos();
+				int yPos2 = pinks.getTwoFlipCardsPair().get(1).getyPos();
+				graphToBack.clearRect(xPos2, yPos2, 150, 150);
+				
+				pairsleft = pairsleft - 1; 
+				System.out.println(pairsleft);
+				pinks.addMatch();
+				
+				graphToBack.clearRect(0, 0, 800, 50);
+				graphToBack.drawString("Please press S key to flip another two cards", 25, 50);
+				
+			}
+			
+		}
+		
+		if(keys[2] && isCardFlipped)
+		{
+			System.out.println("Two cards doesn't match, N key is pressed");
+			isCardFlipped = false;
+			if(pinks.getTwoFlipCardsPair().get(0).getClass().equals(pinks.getTwoFlipCardsPair().get(1).getClass()))
+			{
+				System.out.println("But they are matching cards");
+				graphToBack.setColor(Color.WHITE);
+				graphToBack.fillRect(0, 0, 1300, 1300);
+				graphToBack.setColor(Color.BLACK);
+				graphToBack.drawString("YOU INCORRECTLY ANSWERED. THERE WAS A MATCH!", 400, 300);
+				return;
+			}
+			else
+			{
+				match = false;
+				pinks.getTwoFlipCardsPair().get(0).drawBack(graphToBack);
+				pinks.getTwoFlipCardsPair().get(1).drawBack(graphToBack);
+				
+				graphToBack.clearRect(0, 0, 800, 100);
+				graphToBack.drawString("Please press S key to flip another two cards", 25, 50);
+				
+				
+			}
+		}
+		
+		if (pairsleft == 0) {
+			graphToBack.setColor(Color.WHITE);
+			graphToBack.fillRect(0, 0, 1300, 1300);
+			graphToBack.setColor(Color.BLACK);
+			graphToBack.drawString("YOU WIN!", 400, 300);
+		}
 		
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
@@ -232,18 +211,18 @@ public class Board extends Canvas implements Runnable, KeyListener {
 	{
 	}
  
-   public void run()
-   {
-   	try
-   	{
-   		while(true)
-   		{
-   		   Thread.currentThread().sleep(5);
-            repaint();
-         }
-      }catch(Exception e)
-      {
-      }
-  	} 
+	public void run()
+	{
+		try
+		{
+	   		while(true)
+	   		{
+	   			Thread.currentThread().sleep(5);
+//	            repaint();
+	         }
+	      }catch(Exception e)
+	      {
+	      }
+	  	} 
    
-}
+	}

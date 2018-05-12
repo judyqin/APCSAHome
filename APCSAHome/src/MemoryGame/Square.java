@@ -11,51 +11,46 @@ public abstract class Square implements Locatable {
 
 	public Square()
 	{
-		xPos = 0; 
-		yPos = 0; 
+		setxPos(0); 
+		setyPos(0); 
 	}
 
 	public Square(int x, int y)
 	{
-		xPos = x; 
+		setxPos(x); 
+		setyPos(y);
+	}
+	
+	public void setPos(int x, int y)
+	{
+		xPos = x;
 		yPos = y;
-	}
-
-	public void setPos( int x, int y)
-	{
-		xPos = x; 
-		yPos = y; 
-	}
-
-
-	public void setX(int x)
-	{
-		xPos = x; 
-	}
-
-
-	public void setY(int y)
-	{
-		yPos = y; 
-	}
-
-	public int getX()
-	{
-		return xPos;
-	}
-
-
-	public int getY()
-	{
-		return yPos;
 	}
 
 	
 	public abstract void draw(Graphics window);
+	public abstract void drawBack(Graphics window);
 	
 	public String toString()
 	{
-		return "";
+		return "xPos = " + xPos + "; yPos = " + yPos;
 	}
 	
+	public int getxPos() {
+		return xPos;
+	}
+
+	public void setxPos(int xPos) {
+		this.xPos = xPos;
+	}
+
+	public int getyPos() {
+		return yPos;
+	}
+
+	public void setyPos(int yPos) {
+		this.yPos = yPos;
+	}
+	
+
 }
