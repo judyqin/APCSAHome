@@ -1,4 +1,4 @@
-package MemoryGame;
+package MatchingGame;
 import javax.swing.JFrame;
 import java.awt.Component;
 import java.util.Scanner;

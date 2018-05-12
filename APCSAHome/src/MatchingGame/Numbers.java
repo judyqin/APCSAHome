@@ -1,4 +1,4 @@
-package MemoryGame;
+package MatchingGame;
 
 import java.util.ArrayList;
 

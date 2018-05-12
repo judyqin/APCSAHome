@@ -1,4 +1,4 @@
-package MemoryGame;
+package MatchingGame;
 
 import java.awt.Graphics;
 import java.awt.Image;

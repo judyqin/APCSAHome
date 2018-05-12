@@ -1,4 +1,4 @@
-package MemoryGame;
+package MatchingGame;
 
 import static java.lang.Character.toUpperCase;
 
@@ -68,15 +68,15 @@ public class Board extends Canvas implements Runnable, KeyListener {
 
 		{
 			graphToBack.setColor(Color.BLACK);
-			graphToBack.drawString("MEMORY GAME ", 25, 50 );
+			graphToBack.drawString("MATCHING GAME ", 25, 50 );
 			graphToBack.drawString("If you see a matching pair, please press Y, if not a matching pair, please press N", 25, 100);
 			graphToBack.drawString("Press Space key to begin!", 25, 150);
 		}
 		
 		if(keys[0] == true && !initialized)
 		{
-			System.out.println("Space key pressed");
-			System.out.println("Canvas initialized");
+//			System.out.println("Space key pressed");
+//			System.out.println("Canvas initialized");
 			initialized = true;
 			graphToBack.clearRect(0, 0, 800, 800);
 			
@@ -92,7 +92,7 @@ public class Board extends Canvas implements Runnable, KeyListener {
 		
 		if(keys[3] && !isCardFlipped)
 		{
-			System.out.println("S key is pressed");
+//			System.out.println("S key is pressed");
 			gameStart = true;
 			isCardFlipped = true;
 			ArrayList<Square> twoFlipCard = pinks.rand();
@@ -106,11 +106,11 @@ public class Board extends Canvas implements Runnable, KeyListener {
 		
 		if(keys[1] && isCardFlipped)
 		{
-			System.out.println("Two cards match, Y key is pressed");
+//			System.out.println("Two cards match, Y key is pressed");
 			isCardFlipped = false;
 			if(!pinks.getTwoFlipCardsPair().get(0).getClass().equals(pinks.getTwoFlipCardsPair().get(1).getClass()))
 			{
-				System.out.println("But they are not matching cards");
+//				System.out.println("But they are not matching cards");
 				graphToBack.setColor(Color.WHITE);
 				graphToBack.fillRect(0, 0, 1300, 1300);
 				graphToBack.setColor(Color.BLACK);
@@ -129,7 +129,7 @@ public class Board extends Canvas implements Runnable, KeyListener {
 				graphToBack.clearRect(xPos2, yPos2, 150, 150);
 				
 				pairsleft = pairsleft - 1; 
-				System.out.println(pairsleft);
+//				System.out.println(pairsleft);
 				pinks.addMatch();
 				
 				graphToBack.clearRect(0, 0, 800, 50);
@@ -141,11 +141,11 @@ public class Board extends Canvas implements Runnable, KeyListener {
 		
 		if(keys[2] && isCardFlipped)
 		{
-			System.out.println("Two cards doesn't match, N key is pressed");
+//			System.out.println("Two cards doesn't match, N key is pressed");
 			isCardFlipped = false;
 			if(pinks.getTwoFlipCardsPair().get(0).getClass().equals(pinks.getTwoFlipCardsPair().get(1).getClass()))
 			{
-				System.out.println("But they are matching cards");
+//				System.out.println("But they are matching cards");
 				graphToBack.setColor(Color.WHITE);
 				graphToBack.fillRect(0, 0, 1300, 1300);
 				graphToBack.setColor(Color.BLACK);

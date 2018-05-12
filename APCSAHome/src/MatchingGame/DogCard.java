@@ -1,4 +1,4 @@
-package MemoryGame;
+package MatchingGame;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -6,29 +6,31 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class HouseCard extends Square
+public class DogCard extends Square
 {
 	private Image image;
 	private PinkCard back;
-	
-	public HouseCard()
+
+	public DogCard()
 	{
 		this(0,0);
 	}
 
-	public HouseCard(int x, int y)
+	public DogCard(int x, int y)
 	{
 		super(x, y);
 		back = new PinkCard(x, y);
 		try
 		{
-			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MemoryGame/house.JPG"));
+			image = ImageIO.read(new File("/Users/judyqin/git/APCSAHome/APCSAHome/src/MemoryGame/dog.JPG"));
+
 		}
 		catch(Exception e)
 		{
-			System.out.println("HouseCard: we have a problem!");
+			System.out.println("DogCard: we have a problem!");
 		}
 	}
+
 
 	public void draw( Graphics window )
 	{

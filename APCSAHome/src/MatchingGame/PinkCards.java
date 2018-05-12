@@ -1,4 +1,4 @@
-package MemoryGame;
+package MatchingGame;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -41,7 +41,7 @@ public class PinkCards extends PinkCard {
 		}
 		
 		p = new PinkCard[4][4];
-		System.out.println("PinkCards: xPos = " + x + ", yPos = " + y + ", p.length = " + p.length);
+//		System.out.println("PinkCards: xPos = " + x + ", yPos = " + y + ", p.length = " + p.length);
 		
 		for (int i = 0; i < p.length; i++) {
 			for (int j = 0; j < p[0].length; j++) {
@@ -52,11 +52,11 @@ public class PinkCards extends PinkCard {
 			y = y + 150; 
 		}
 		
-		for (int i = 0; i < p.length; i++) {
-			for (int j = 0; j < p[0].length; j++) {
-				System.out.println("p[" + i + "]"+"[" + j + "]" + " = " + p[i][j]);
-			}
-		}
+//		for (int i = 0; i < p.length; i++) {
+//			for (int j = 0; j < p[0].length; j++) {
+//				System.out.println("p[" + i + "]"+"[" + j + "]" + " = " + p[i][j]);
+//			}
+//		}
 		
 	}
 	
@@ -66,7 +66,7 @@ public class PinkCards extends PinkCard {
 	
 	public ArrayList<Square> rand() {
 		
-		System.out.println("Begin PinkCard[][] rand()");
+//		System.out.println("Begin PinkCard[][] rand()");
 		boolean isR1Good = true, isR2Good = true;
 		int increment1 = 0; 
 		int increment2 = 0; 
@@ -74,13 +74,13 @@ public class PinkCards extends PinkCard {
 		do 
 		{
 			r1 = randomGenerator.nextInt(16);
-			System.out.println("this is r1 " + r1);
+//			System.out.println("this is r1 " + r1);
 			isR1Good = true; 
 			if (matchedCards.size() > 0) {
 				increment1 = 0; 
 				do {
 					if (r1 == matchedCards.get(increment1)) {
-						System.out.println("this is r1 when matched " + r1);
+//						System.out.println("this is r1 when matched " + r1);
 						isR1Good = false; 
 					}
 					increment1++; 
@@ -89,19 +89,19 @@ public class PinkCards extends PinkCard {
 		} 
 		while(!isR1Good);
 
-		System.out.println("r1 good before r2");
+//		System.out.println("r1 good before r2");
 		
 		do 
 		{
 			r2 = randomGenerator.nextInt(16);
-			System.out.println("this is r2 " + r2);
+//			System.out.println("this is r2 " + r2);
 			isR2Good = true; 
 			if (r1 != r2) { 
 				if (matchedCards.size() > 0) {
 					increment2 = 0; 
 					do {
 						if ((r2 == matchedCards.get(increment2))) {
-							System.out.println("this is r2 when matched "+ r2);
+//							System.out.println("this is r2 when matched "+ r2);
 							isR2Good = false; 
 						}
 						increment2++; 
@@ -116,7 +116,7 @@ public class PinkCards extends PinkCard {
 		
 //		cardIndex.remove(new Integer(r2));
 		
-		System.out.println("r1=" + r1 + ", r2=" + r2);
+//		System.out.println("r1=" + r1 + ", r2=" + r2);
 
 		if((twoFlipCardsPair != null) && (twoFlipCardsPair.size() != 0))
 		{
@@ -134,10 +134,10 @@ public class PinkCards extends PinkCard {
 		twoFlipCardsPair.add(cardSet.get(r2));
 		
 		
-		for (int i = 0; i < cardIndex.size(); i++)
-		{
-			System.out.println("cardIndex: " + i + " = " + cardIndex.get(i));
-		}
+//		for (int i = 0; i < cardIndex.size(); i++)
+//		{
+//			System.out.println("cardIndex: " + i + " = " + cardIndex.get(i));
+//		}
 		
 		return twoFlipCardsPair;
 	  
@@ -150,8 +150,8 @@ public class PinkCards extends PinkCard {
 	public void addMatch() {
 		matchedCards.add(new Integer(r1));
 		matchedCards.add(new Integer(r2));
-		System.out.println(r1);
-		System.out.println(r2);
+//		System.out.println(r1);
+//		System.out.println(r2);
 	}
 	
 //	public ArrayList<Square> removeInt(ArrayList<Square> arr, int num) {
